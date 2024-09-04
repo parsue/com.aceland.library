@@ -1,0 +1,21 @@
+{
+  "name": "com.aceland.library",
+  "displayName": "AMVR Library",
+  "version": "1.0.0",
+  "author": {
+    "name": "Parsue - AceLand Workshop",
+    "url": "http://www.parsue.io/"
+  },
+  "unity": "2022.3",
+  "description": "AceLand Library is a local supporting services dependency",
+  "keywords": [
+    "aceland",
+	"library"
+  ],
+  "dependencies": {
+    "com.annulusgames.burst-linq": "1.2.0",
+    "com.cysharp.unitask": "2.5.3",
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "documentationUrl": ""
+}
