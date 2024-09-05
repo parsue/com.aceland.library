@@ -1,6 +1,6 @@
 {
   "name": "com.aceland.library",
-  "displayName": "AMVR Library",
+  "displayName": "AceLand Library",
   "version": "1.0.0",
   "author": {
     "name": "Parsue - AceLand Workshop",
@@ -10,7 +10,7 @@
   "description": "AceLand Library is a local supporting services dependency",
   "keywords": [
     "aceland",
-	"library"
+    "library"
   ],
   "dependencies": {
     "com.annulusgames.burst-linq": "1.2.0",
