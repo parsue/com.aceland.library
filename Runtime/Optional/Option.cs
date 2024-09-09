@@ -13,7 +13,7 @@ namespace AceLand.Library.Optional
         public bool IsPresent() => _content is not null;
         public T? Get() => _content;
         
-        public Option<TResult> Map<TResult>(Func<T, TResult> map) where TResult : class =>
+        public readonly Option<TResult> Map<TResult>(Func<T, TResult> map) where TResult : class =>
             new() { _content = _content is not null ? map(_content) : null };
         public ValueOption<TResult> MapValue<TResult>(Func<T, TResult> map) where TResult : struct =>
             _content is not null ? ValueOption<TResult>.Some(map(_content)) : ValueOption<TResult>.None();
