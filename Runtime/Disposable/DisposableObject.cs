@@ -8,7 +8,7 @@ namespace AceLand.Library.Disposable
 
         public void Dispose()
         {
-            BeforeDispose();
+            DisposeManagedResources();
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -30,7 +30,7 @@ namespace AceLand.Library.Disposable
             Disposed = true;
         }
 
-        protected virtual void BeforeDispose()
+        protected virtual void DisposeManagedResources()
         {
             // noop
         }
