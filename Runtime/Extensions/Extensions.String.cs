@@ -1,3 +1,7 @@
+using System.IO;
+using System.Threading.Tasks;
+using UnityEngine;
+
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
@@ -7,22 +11,24 @@ namespace AceLand.Library.Extensions
             return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
         }
 
-        public static async Task SaveToFile(this string data, string filename)
+        public static string ToFullPath(this string filename)
+            => Path.Combine(Application.persistentDataPath, filename);
+
+        public static async Task SaveToFile(this string data, string fileFullPathName)
         {
             if (data.IsNullOrEmptyOrWhiteSpace()) return;
 
-            var filePath = Path.Combine(Application.persistentDataPath, filename);
+            if (!File.Exists(fileFullPathName))
+                await File.Create(fileFullPathName).DisposeAsync();
 
-            if (!File.Exists(filePath))
-                await File.Create(filePath).DisposeAsync();
-
-            await File.WriteAllTextAsync(filePath, data);
+            await File.WriteAllTextAsync(fileFullPathName, data);
         }
 
-        public static async Task<string> LoadFromFile(this string filename)
+        public static async Task<string> LoadFromFile(this string fileFullPathName)
         {
-            var filePath = Path.Combine(Application.persistentDataPath, filename);
-            return !File.Exists(filePath) ? string.Empty : await File.ReadAllTextAsync(filePath);
+            return !File.Exists(fileFullPathName) 
+                ? string.Empty 
+                : await File.ReadAllTextAsync(fileFullPathName);
         }
     }
 }
