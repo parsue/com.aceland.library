@@ -8,34 +8,24 @@ namespace AceLand.Library.Disposable
 
         public void Dispose()
         {
-            DisposeManagedResources();
             Dispose(true);
             GC.SuppressFinalize(this);
         }
         
         protected void Dispose(bool disposing)
         {
-            if (Disposed)
-            {
-                return;
-            }
+            if (Disposed) return;
 
             if (disposing)
             {
-                DisposeUnmanagedState();
+                DisposeManagedResources();
+                DisposeUnmanagedResources();
             }
-
-            DisposeUnmanagedResources();
 
             Disposed = true;
         }
 
         protected virtual void DisposeManagedResources()
-        {
-            // noop
-        }
-
-        protected virtual void DisposeUnmanagedState()
         {
             // noop
         }
