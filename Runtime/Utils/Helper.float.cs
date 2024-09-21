@@ -31,5 +31,10 @@ namespace AceLand.Library.Utils
 
             return smoothedTarget;
         }
+        
+        public static float InverseLerp(float a, float b, float value)
+        {
+            return math.abs(a - b) > float.Epsilon ? math.clamp((value - a) / (b - a), 0, 1) : 0.0f;
+        }
     }
 }
