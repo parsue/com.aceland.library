@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace AceLand.Library.ProjectSetting
@@ -6,28 +7,28 @@ namespace AceLand.Library.ProjectSetting
     public abstract class ProjectSettings<T> : ScriptableObject
         where T : ScriptableObject
     {
-        private const string Path = "Assets/Resources";
+        private const string PATH = "Assets/Resources";
 
 #if UNITY_EDITOR
         private static T GetOrCreateSettings()
         {
             var settingName = typeof(T).Name;
-            var fullPath = Path + "/" + settingName + ".asset";
-            var settings = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(fullPath);
+            var fullPath = PATH + "/" + settingName + ".asset";
+            var settings = AssetDatabase.LoadAssetAtPath<T>(fullPath);
             if (settings != null) return settings;
             
-            if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
+            if (!Directory.Exists(PATH)) Directory.CreateDirectory(PATH);
             
             settings = CreateInstance<T>();
-            UnityEditor.AssetDatabase.CreateAsset(settings, fullPath);
-            UnityEditor.AssetDatabase.SaveAssets();
+            AssetDatabase.CreateAsset(settings, fullPath);
+            AssetDatabase.SaveAssets();
             
             return settings;
         }
         
-        public static UnityEditor.SerializedObject GetSerializedSettings()
+        public static SerializedObject GetSerializedSettings()
         {
-            return new(GetOrCreateSettings());
+            return new SerializedObject(GetOrCreateSettings());
         }
 #endif
     }
