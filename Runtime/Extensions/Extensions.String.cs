@@ -1,6 +1,6 @@
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace AceLand.Library.Extensions
 {
@@ -11,24 +11,22 @@ namespace AceLand.Library.Extensions
             return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
         }
 
-        public static string ToFullPath(this string filename)
-            => Path.Combine(Application.persistentDataPath, filename);
-
-        public static async Task SaveToFile(this string data, string fileFullPathName)
+        public static async Task SaveToFile(this string data, string fullFilePathName,
+            CancellationToken token)
         {
             if (data.IsNullOrEmptyOrWhiteSpace()) return;
 
-            if (!File.Exists(fileFullPathName))
-                await File.Create(fileFullPathName).DisposeAsync();
+            if (!File.Exists(fullFilePathName))
+                await File.Create(fullFilePathName).DisposeAsync();
 
-            await File.WriteAllTextAsync(fileFullPathName, data);
+            await File.WriteAllTextAsync(fullFilePathName, data, token);
         }
 
-        public static async Task<string> LoadFromFile(this string fileFullPathName)
+        public static async Task<string> LoadFromFile(this string fullFilePathName, CancellationToken token)
         {
-            return !File.Exists(fileFullPathName) 
+            return !File.Exists(fullFilePathName) 
                 ? string.Empty 
-                : await File.ReadAllTextAsync(fileFullPathName);
+                : await File.ReadAllTextAsync(fullFilePathName, token);
         }
     }
 }
