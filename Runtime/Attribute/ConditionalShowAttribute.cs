@@ -9,70 +9,93 @@ namespace AceLand.Library.Attribute
     {
         public delegate bool ShowCondition();
 
-        public string FieldName;
-        public string[] FieldNames;
-        public int[] enumIndex;
-        public bool boolValue;
-        public bool isFlag;
+        public readonly string FieldName;
+        public readonly string[] FieldNames;
+        public readonly int[] EnumIndex;
+        public readonly bool BoolValue;
+        public readonly bool IsFlag;
+        public readonly bool IsValidator;
+        public readonly Func<bool> Validator;
 
         public ConditionalShowAttribute(params string[] boolVariableNames)
         {
             FieldName = string.Empty;
             FieldNames = boolVariableNames;
-            boolValue = true;
-            isFlag = false;
+            BoolValue = true;
+            IsFlag = false;
+            IsValidator = false;
+            Validator = null;
+        }
+
+        public ConditionalShowAttribute(Func<bool> validator)
+        {
+            FieldName = string.Empty;
+            FieldNames = null;
+            IsFlag = false;
+            IsValidator = true;
+            Validator = validator;
         }
 
         public ConditionalShowAttribute(string boolVariableName, bool boolValue = true)
         {
             FieldName = boolVariableName;
             FieldNames = null;
-            this.boolValue = boolValue;
-            isFlag = false;
+            BoolValue = boolValue;
+            IsFlag = false;
+            IsValidator = false;
+            Validator = null;
         }
 
         public ConditionalShowAttribute(string enumVariableName, params object[] enumValues)
         {
-            for (int i = 0; i < enumValues.Length; i++)
-                if (!enumValues[i].GetType().IsEnum) return;
+            foreach (var t in enumValues)
+                if (!t.GetType().IsEnum) return;
 
             FieldName = enumVariableName;
             FieldNames = null;
-            isFlag = false;
+            IsFlag = false;
+            IsValidator = false;
+            Validator = null;
 
-            enumIndex = new int[enumValues.Length];
-            for (int i = 0; i < enumValues.Length; i++)
-                enumIndex[i] = Array.IndexOf(Enum.GetValues(enumValues[i].GetType()), enumValues[i]);
+            EnumIndex = new int[enumValues.Length];
+            for (var i = 0; i < enumValues.Length; i++)
+                EnumIndex[i] = Array.IndexOf(Enum.GetValues(enumValues[i].GetType()), enumValues[i]);
         }
 
         public ConditionalShowAttribute(string enumVariableName, params int[] enumIndex)
         {
             FieldName = enumVariableName;
             FieldNames = null;
-            this.enumIndex = enumIndex;
-            isFlag = false;
+            EnumIndex = enumIndex;
+            IsFlag = false;
+            IsValidator = false;
+            Validator = null;
         }
 
         public ConditionalShowAttribute(string enumVariableName, bool isFlag, params object[] enumValues)
         {
-            for (int i = 0; i < enumValues.Length; i++)
-                if (!enumValues[i].GetType().IsEnum) return;
+            foreach (var t in enumValues)
+                if (!t.GetType().IsEnum) return;
 
             FieldName = enumVariableName;
             FieldNames = null;
-            this.isFlag = isFlag;
+            IsFlag = isFlag;
+            IsValidator = false;
+            Validator = null;
 
-            enumIndex = new int[enumValues.Length];
-            for (int i = 0; i < enumValues.Length; i++)
-                enumIndex[i] = Array.IndexOf(Enum.GetValues(enumValues[i].GetType()), enumValues[i]);
+            EnumIndex = new int[enumValues.Length];
+            for (var i = 0; i < enumValues.Length; i++)
+                EnumIndex[i] = Array.IndexOf(Enum.GetValues(enumValues[i].GetType()), enumValues[i]);
         }
 
         public ConditionalShowAttribute(string enumVariableName, bool isFlag, params int[] enumIndexes)
         {
             FieldName = enumVariableName;
             FieldNames = null;
-            enumIndex = enumIndexes;
-            this.isFlag = isFlag;
+            EnumIndex = enumIndexes;
+            IsFlag = isFlag;
+            IsValidator = false;
+            Validator = null;
         }
     }
 }

@@ -31,23 +31,23 @@ namespace AceLand.Library.Editor.ConditionalShowProperty
 
         private bool GetConditionalShowAttributeResult(ConditionalShowAttribute baseAttr, SerializedProperty property)
         {
+            if (baseAttr.IsValidator && baseAttr.Validator is not null) return baseAttr.Validator.Invoke();
+
             var sourceProperty = property.serializedObject.FindProperty(baseAttr.FieldName);
 
-            if (sourceProperty is null)
-            {
-                if (baseAttr.FieldNames == null || baseAttr.FieldNames.Length == 0) return false;
+            if (sourceProperty is not null) return CheckPropertyType(baseAttr, sourceProperty);
+            
+            if (baseAttr.FieldNames == null || baseAttr.FieldNames.Length == 0) return false;
                 
-                foreach (var fieldName in baseAttr.FieldNames)
-                {
-                    sourceProperty = property.serializedObject.FindProperty(fieldName);
-                    if (sourceProperty is null) return false;
-                    if (!CheckPropertyType(baseAttr, sourceProperty)) return false;
-                }
-
-                return true;
+            foreach (var fieldName in baseAttr.FieldNames)
+            {
+                sourceProperty = property.serializedObject.FindProperty(fieldName);
+                if (sourceProperty is null) return false;
+                if (!CheckPropertyType(baseAttr, sourceProperty)) return false;
             }
 
-            return CheckPropertyType(baseAttr, sourceProperty);
+            return true;
+
         }
 
         private bool CheckPropertyType(ConditionalShowAttribute condHAtt, SerializedProperty property)
@@ -55,12 +55,12 @@ namespace AceLand.Library.Editor.ConditionalShowProperty
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Boolean:
-                    return property.boolValue == condHAtt.boolValue;
+                    return property.boolValue == condHAtt.BoolValue;
 
                 case SerializedPropertyType.Enum:
-                    foreach (var index in condHAtt.enumIndex)
+                    foreach (var index in condHAtt.EnumIndex)
                     {
-                        if (condHAtt.isFlag)
+                        if (condHAtt.IsFlag)
                         {
                             if ((property.enumValueIndex & index) == 1)
                                 return true;

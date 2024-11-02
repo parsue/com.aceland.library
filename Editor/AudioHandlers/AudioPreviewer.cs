@@ -5,7 +5,7 @@ using UnityEditor.Callbacks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace AceLand.Editor.AudioHandlers
+namespace AceLand.Library.Editor.AudioHandlers
 {
     public static class AudioPreviewer
     {

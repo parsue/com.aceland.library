@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable enable
 namespace AceLand.Library.Optional
 {
     public static class OptionalExtensions
