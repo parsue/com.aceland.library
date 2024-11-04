@@ -14,6 +14,11 @@ namespace AceLand.Library.Extensions
                 else Object.Destroy(child);
             }
         }
+        
+        public static void DestroyAllChildren(this MonoBehaviour mono)
+        {
+            DestroyAllChildren(mono.transform);
+        }
 
         public static void DestroyAllChildren<T>(this Transform transform) where T : MonoBehaviour
         {
@@ -26,6 +31,11 @@ namespace AceLand.Library.Extensions
                 if (Application.isPlaying) Object.DestroyImmediate(item);
                 else Object.Destroy(item);
             }
+        }
+        
+        public static void DestroyAllChildren<T>(this MonoBehaviour mono) where T : MonoBehaviour
+        {
+            DestroyAllChildren<T>(mono.transform);
         }
 
         public static void CopyDataFrom(this Transform transform, Transform source, bool copyScale = false)
