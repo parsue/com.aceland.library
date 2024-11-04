@@ -24,7 +24,10 @@ namespace AceLand.Library.Extensions
         {
             var list = new List<T>();
             foreach (var child in transform)
-                if (child is T t) list.Add(t);
+            {
+                var tr = (Transform)child;
+                if (tr.TryGetComponent<T>(out var mono)) list.Add(mono);
+            }
 
             foreach (var item in list)
             {
