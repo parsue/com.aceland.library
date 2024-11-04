@@ -22,11 +22,11 @@ namespace AceLand.Library.Extensions
 
         public static void DestroyAllChildren<T>(this Transform transform) where T : MonoBehaviour
         {
-            var list = new List<T>();
+            var list = new List<GameObject>();
             foreach (var child in transform)
             {
                 var tr = (Transform)child;
-                if (tr.TryGetComponent<T>(out var mono)) list.Add(mono);
+                if (tr.TryGetComponent<T>(out var mono)) list.Add(mono.gameObject);
             }
 
             foreach (var item in list)
