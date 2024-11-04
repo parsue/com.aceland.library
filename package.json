@@ -2,7 +2,7 @@
   "name": "com.aceland.library",
   "version": "1.0.0",
   "displayName": "AceLand Library",
-  "description": "AceLand Library is a local supporting services dependency",
+  "description": "AceLand Library is utilities, editor extension, unity low-level tools, c# and unity implements.  Most AceLand Packages is relying this package to work.",
   "unity": "2022.3",
   "repository": {
     "type": "git",
