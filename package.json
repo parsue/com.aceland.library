@@ -1,13 +1,19 @@
 {
   "name": "com.aceland.library",
-  "displayName": "AceLand Library",
   "version": "1.0.0",
+  "displayName": "AceLand Library",
+  "description": "AceLand Library is a local supporting services dependency",
+  "unity": "2022.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parsue/com.aceland.library.git"
+  },
+  "license": "MIT",
   "author": {
     "name": "Parsue - AceLand Workshop",
+    "email": "parsue@gmail.com",
     "url": "http://www.parsue.io/"
   },
-  "unity": "2022.3",
-  "description": "AceLand Library is a local supporting services dependency",
   "keywords": [
     "aceland",
     "library"
@@ -15,5 +21,9 @@
   "dependencies": {
     "com.unity.mathematics": "1.3.2"
   },
-  "documentationUrl": ""
+  "publishConfig": {
+    "registry": "https://package.openupm.com"
+  },
+  "documentationUrl": "",
+  "type": "framework"
 }
