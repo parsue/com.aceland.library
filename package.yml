@@ -30,4 +30,4 @@ imageFit: cover
 # The README.md file path (branchname:filename)
 readme: 'main:README.md'
 # The package hunter's GitHub username
-hunter: author
+hunter: parsue
