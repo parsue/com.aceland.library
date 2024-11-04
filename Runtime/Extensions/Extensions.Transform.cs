@@ -10,8 +10,8 @@ namespace AceLand.Library.Extensions
             while (transform.childCount > 0)
             {
                 var child = transform.GetChild(0).gameObject;
-                if (Application.isPlaying) Object.DestroyImmediate(child);
-                else Object.Destroy(child);
+                if (Application.isPlaying) Object.Destroy(child);
+                else Object.DestroyImmediate(child);
             }
         }
         
@@ -31,8 +31,8 @@ namespace AceLand.Library.Extensions
 
             foreach (var item in list)
             {
-                if (Application.isPlaying) Object.DestroyImmediate(item);
-                else Object.Destroy(item);
+                if (Application.isPlaying) Object.Destroy(item);
+                else Object.DestroyImmediate(item);
             }
         }
         
