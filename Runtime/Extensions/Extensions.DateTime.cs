@@ -10,7 +10,7 @@ namespace AceLand.Library.Extensions
         public static TimeSpan ToTimeSpan(this DateTime dateTime) =>
             dateTime - START_DATETIME;
         
-        public static DateTime ToTimeSpan(this TimeSpan timeSpan) =>
+        public static DateTime ToDateTime(this TimeSpan timeSpan) =>
             START_DATETIME_UTC.AddSeconds(timeSpan.TotalSeconds);
 
         public static DateTime ToDateTime(this float totalSeconds) =>
