@@ -12,6 +12,11 @@ namespace AceLand.Library.Extensions
             return 0;
         }
 
+        public static Vector2Int yx(this Vector2Int value)
+        {
+            return new Vector2Int(value.y, value.x);
+        }
+
         public static Vector2Int x(this Vector2Int value, int x)
         {
             var v = value;

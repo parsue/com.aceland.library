@@ -1,13 +1,12 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        public static quaternion MinusOne(this Quaternion value)
+        public static Quaternion Negative(this Quaternion value)
         {
-            return new quaternion(value.x * -1, value.y * -1, value.z * -1, value.w * -1);
+            return new Quaternion(value.x * -1, value.y * -1, value.z * -1, value.w * -1);
         }
 
         public static Quaternion x(this Quaternion value, float x)

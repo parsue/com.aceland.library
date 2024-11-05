@@ -43,26 +43,10 @@ namespace AceLand.Library.Extensions
             return v3;
         }
 
-        public static float3 AdjYZ(this float3 value, float y, float z)
-        {
-            var v3 = value;
-            v3.y += y;
-            v3.z += z;
-            return v3;
-        }
-
         public static float3 AdjY(this float3 value, float y)
         {
             var v3 = value;
             v3.y += y;
-            return v3;
-        }
-
-        public static float3 AdjXZ(this float3 value, float x, float z)
-        {
-            var v3 = value;
-            v3.x += x;
-            v3.z += z;
             return v3;
         }
 
@@ -78,6 +62,22 @@ namespace AceLand.Library.Extensions
             var v3 = value;
             v3.x += x;
             v3.y += y;
+            return v3;
+        }
+
+        public static float3 AdjXZ(this float3 value, float x, float z)
+        {
+            var v3 = value;
+            v3.x += x;
+            v3.z += z;
+            return v3;
+        }
+
+        public static float3 AdjYZ(this float3 value, float y, float z)
+        {
+            var v3 = value;
+            v3.y += y;
+            v3.z += z;
             return v3;
         }
 

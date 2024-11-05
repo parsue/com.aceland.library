@@ -11,7 +11,7 @@ namespace AceLand.Library.Extensions
             return v3;
         }
 
-        public static Vector3Int x(this Vector3Int value, int y, int z)
+        public static Vector3Int yz(this Vector3Int value, int y, int z)
         {
             var v3 = value;
             v3.y = y;
@@ -26,7 +26,7 @@ namespace AceLand.Library.Extensions
             return v3;
         }
 
-        public static Vector3Int y(this Vector3Int value, int x, int z)
+        public static Vector3Int xz(this Vector3Int value, int x, int z)
         {
             var v3 = value;
             v3.x = x;
@@ -41,7 +41,7 @@ namespace AceLand.Library.Extensions
             return v3;
         }
 
-        public static Vector3Int z(this Vector3Int value, int x, int y)
+        public static Vector3Int xy(this Vector3Int value, int x, int y)
         {
             var v3 = value;
             v3.x = x;

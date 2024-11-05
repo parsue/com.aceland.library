@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 namespace AceLand.Library.Mono
 {
     [ExecuteInEditMode]
-    [AddComponentMenu("AMVR/Tool/Follow Object")]
+    [AddComponentMenu("AceLand/Tool/Follow Object")]
     public class FollowObject : MonoBehaviour
     {
         [Header("Settings")]

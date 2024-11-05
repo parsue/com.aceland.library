@@ -1,6 +1,6 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
-#nullable enable
 namespace AceLand.Library.Optional
 {
     public struct ValueOption<T> : IEquatable<ValueOption<T>> where T : struct

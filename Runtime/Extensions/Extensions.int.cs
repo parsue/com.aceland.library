@@ -4,7 +4,7 @@ namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        public static bool Between(this int value, int min, int max, bool includingMax = false)
+        public static bool IsBetween(this int value, int min, int max, bool includingMax = false)
         {
             return includingMax switch
             {
@@ -42,7 +42,7 @@ namespace AceLand.Library.Extensions
         public static string CurrencySuffix(this int value, int decimalPlaces = 0)
         {
             long v = value;
-            return v.SizeSuffix(decimalPlaces);
+            return v.CurrencySuffix(decimalPlaces);
         }
     }
 }

@@ -5,8 +5,17 @@ namespace AceLand.Library.KalmanFilters
 {
     public static class KalmanFilter
     {
-        public static KalmanFilterBuilder<T> Builder<T>() where T : unmanaged => new KalmanFilterBuilder<T>();
-        public class KalmanFilterBuilder<T> where T : unmanaged
+        public static IKalmanFilterBuilder<T> Builder<T>() where T : unmanaged => new KalmanFilterBuilder<T>();
+        
+        public interface IKalmanFilterBuilder<T> where T : unmanaged
+        {
+            IKalmanFilter<T> Build();
+            IKalmanFilterBuilder<T> WithQ(float q);
+            IKalmanFilterBuilder<T> WithR(float r);
+            IKalmanFilterBuilder<T> WithP(float p);
+        }
+        private class KalmanFilterBuilder<T> : IKalmanFilterBuilder<T>
+            where T : unmanaged
         {
             private float _q = 0.000001f;
             private float _r = 0.001f;
@@ -27,19 +36,19 @@ namespace AceLand.Library.KalmanFilters
                 return kalmanFilter;
             }
 
-            public KalmanFilterBuilder<T> WithQ(float q)
+            public IKalmanFilterBuilder<T> WithQ(float q)
             {
                 _q = q;
                 return this;
             }
 
-            public KalmanFilterBuilder<T> WithR(float r)
+            public IKalmanFilterBuilder<T> WithR(float r)
             {
                 _r = r;
                 return this;
             }
 
-            public KalmanFilterBuilder<T> WithP(float p)
+            public IKalmanFilterBuilder<T> WithP(float p)
             {
                 _p = p;
                 return this;
