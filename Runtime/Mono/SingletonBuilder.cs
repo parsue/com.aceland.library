@@ -3,8 +3,9 @@ using System.Linq;
 using AceLand.Library.Attribute;
 using UnityEngine;
 
-namespace AceLand.Mono
+namespace AceLand.Library.Mono
 {
+    [AddComponentMenu("AceLand/Tool/Singleton Builder")]
     public class SingletonBuilder : MonoBehaviour
     {
         [Header("Setting")]

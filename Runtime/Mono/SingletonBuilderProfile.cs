@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AceLand.Mono
+namespace AceLand.Library.Mono
 {
     [CreateAssetMenu(fileName = "Singleton Profile", menuName = "Profiles/Singleton Profile", order = 1)]
     public sealed class SingletonBuilderProfile : ScriptableObject

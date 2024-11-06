@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AceLand.Mono
+namespace AceLand.Library.Mono
 {
     public abstract class Singleton : MonoBehaviour
     {
