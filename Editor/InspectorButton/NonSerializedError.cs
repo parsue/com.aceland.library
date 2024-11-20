@@ -1,9 +1,9 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
-{
-    using System;
-    using UnityEditor;
-    using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
 
+namespace AceLand.Library.Editor.InspectorButton
+{
     [Serializable]
     internal class NonSerializedError { }
 
@@ -12,9 +12,9 @@
     {
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
-            Rect _rectWithoutLabel = EditorGUI.PrefixLabel(rect, label);
+            var rectWithoutLabel = EditorGUI.PrefixLabel(rect, label);
 
-            EditorGUI.HelpBox(_rectWithoutLabel, "Unable to draw a non-serialized type.", MessageType.Error);
+            EditorGUI.HelpBox(rectWithoutLabel, "Unable to draw a non-serialized type.", MessageType.Error);
         }
     }
 }

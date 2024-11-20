@@ -1,10 +1,10 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
-{
-    using AceLand.Library.Attribute;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using UnityEngine;
+﻿using AceLand.Library.Attribute;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 
+namespace AceLand.Library.Editor.InspectorButton
+{
     internal class InspectorButtonWithoutParams : InspectorButton
     {
         public InspectorButtonWithoutParams(MethodInfo method, InspectorButtonAttribute buttonAttribute)
@@ -15,7 +15,7 @@
             if ( ! GUILayout.Button(DisplayName))
                 return;
 
-            foreach (object obj in targets)
+            foreach (var obj in targets)
             {
                 Method.Invoke(obj, null);
             }

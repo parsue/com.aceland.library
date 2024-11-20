@@ -10,9 +10,9 @@ namespace AceLand.Library.KalmanFilters
         public interface IKalmanFilterBuilder<T> where T : unmanaged
         {
             IKalmanFilter<T> Build();
-            IKalmanFilterBuilder<T> WithQ(float q);
-            IKalmanFilterBuilder<T> WithR(float r);
-            IKalmanFilterBuilder<T> WithP(float p);
+            IKalmanFilterBuilder<T> WithQ(float processNoise);
+            IKalmanFilterBuilder<T> WithR(float observationNoise);
+            IKalmanFilterBuilder<T> WithP(float lastPrediction);
         }
         private class KalmanFilterBuilder<T> : IKalmanFilterBuilder<T>
             where T : unmanaged
@@ -36,21 +36,21 @@ namespace AceLand.Library.KalmanFilters
                 return kalmanFilter;
             }
 
-            public IKalmanFilterBuilder<T> WithQ(float q)
+            public IKalmanFilterBuilder<T> WithQ(float processNoise)
             {
-                _q = q;
+                _q = processNoise;
                 return this;
             }
 
-            public IKalmanFilterBuilder<T> WithR(float r)
+            public IKalmanFilterBuilder<T> WithR(float observationNoise)
             {
-                _r = r;
+                _r = observationNoise;
                 return this;
             }
 
-            public IKalmanFilterBuilder<T> WithP(float p)
+            public IKalmanFilterBuilder<T> WithP(float lastPrediction)
             {
-                _p = p;
+                _p = lastPrediction;
                 return this;
             }
         }

@@ -1,9 +1,10 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
+﻿using AceLand.Library.Attribute;
+using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.Reflection;
+
+namespace AceLand.Library.Editor.InspectorButton
 {
-    using AceLand.Library.Attribute;
-    using JetBrains.Annotations;
-    using System.Collections.Generic;
-    using System.Reflection;
 
     public class InspectorButtonsDrawer
     {
@@ -11,10 +12,10 @@
 
         public InspectorButtonsDrawer(object target)
         {
-            const BindingFlags _flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-            var _methods = target.GetType().GetMethods(_flags);
+            const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+            var methods = target.GetType().GetMethods(bindingFlags);
 
-            foreach (MethodInfo method in _methods)
+            foreach (var method in methods)
             {
                 var buttonAttribute = method.GetCustomAttribute<InspectorButtonAttribute>();
 
@@ -27,7 +28,7 @@
 
         public void DrawButtons(IEnumerable<object> targets)
         {
-            foreach (InspectorButton button in Buttons)
+            foreach (var button in Buttons)
                 button.Draw(targets);
         }
     }

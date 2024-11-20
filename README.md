@@ -1,11 +1,10 @@
-## AceLand Library
-AceLand Library is a Unity package including:
-- utilities
-- extensions
-- editor enhancements
-- unity and c# implements.
+## AceLand Unity Packages
+AceLand Unity Packages is a whole set library of utilities, extensions, editor enhancements, frameworks,
+Unity and c# implements designed for Unity Engine.
 
+## Documents
+We use GitBook as a public documents of our packages.
 
-Most AceLand Packages are relying this Library to work.
-
-Document is under construction.
+> Visit our [GitBook](https://aceland-workshop.gitbook.io/aceland-unity-packages/)
+ 
+Please visit our GitBook for details.

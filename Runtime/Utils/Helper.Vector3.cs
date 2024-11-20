@@ -5,9 +5,8 @@ namespace AceLand.Library.Utils
 {
     public static partial class Helper
     {
-        public static Vector3 GetRotateAxis(TransformDirection transformDirection)
-        {
-            return transformDirection switch
+        public static Vector3 GetRotateAxis(TransformDirection transformDirection) =>
+            transformDirection switch
             {
                 TransformDirection.Left => Vector3.left,
                 TransformDirection.Right => Vector3.right,
@@ -17,7 +16,6 @@ namespace AceLand.Library.Utils
                 TransformDirection.Back => Vector3.back,
                 _ => throw new ArgumentOutOfRangeException()
             };
-        }
 
         public static Vector3 SmoothDirection(Vector3 normal, Vector3 inDirection)
         {

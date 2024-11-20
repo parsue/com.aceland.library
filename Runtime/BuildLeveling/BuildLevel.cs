@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace AceLand.Library.BuildLeveling
+﻿namespace AceLand.Library.BuildLeveling
 {
     public enum BuildLevel
     {
         None,
         Editor,
-        DevelopmentBuild,
-        Build,
+        Development,
+        Production,
     }
 
     public static class BuildLevelUtils
@@ -34,6 +32,30 @@ namespace AceLand.Library.BuildLeveling
             return level >= BuildLevel.DevelopmentBuild;
 #else
             return level >= BuildLevel.Build;
+#endif
+        }
+
+        public static bool IsAcceptedLevelInvert(this BuildLevel level)
+        {
+            if (level == BuildLevel.None) return false;
+#if UNITY_EDITOR
+            return level <= BuildLevel.Editor;
+#elif DEBUG
+            return level <= BuildLevel.DevelopmentBuild;
+#else
+            return level <= BuildLevel.Build;
+#endif
+        }
+
+        public static bool IsAcceptedLevelOnly(this BuildLevel level)
+        {
+            if (level == BuildLevel.None) return false;
+#if UNITY_EDITOR
+            return level == BuildLevel.Editor;
+#elif DEBUG
+            return level == BuildLevel.DevelopmentBuild;
+#else
+            return level == BuildLevel.Build;
 #endif
         }
     }

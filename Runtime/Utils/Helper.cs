@@ -8,16 +8,6 @@ namespace AceLand.Library.Utils
 {
     public static partial class Helper
     {
-        public static T DeepClone<T>(T deepCopyObject)
-        {
-            using var ms = new MemoryStream();
-            var formatter = GetBinaryFormatter();
-            formatter.Serialize(ms, deepCopyObject);
-            ms.Position = 0;
-
-            return (T)formatter.Deserialize(ms);
-        }
-        
         public static BinaryFormatter GetBinaryFormatter()
         {
             var formatter = new BinaryFormatter();

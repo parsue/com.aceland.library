@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AceLand.Library.Extensions
 {
@@ -6,13 +7,11 @@ namespace AceLand.Library.Extensions
     {
         public static bool TryGetFirstKeyByValue<TKey, TValue>(this Dictionary<TKey, TValue> dict, TValue val, out TKey key)
         {
-            foreach (KeyValuePair<TKey, TValue> pair in dict)
+            foreach (var pair in dict)
             {
-                if (EqualityComparer<TValue>.Default.Equals(pair.Value, val))
-                {
-                    key = pair.Key;
-                    return true;
-                }
+                if (!EqualityComparer<TValue>.Default.Equals(pair.Value, val)) continue;
+                key = pair.Key;
+                return true;
             }
             key = default;
             return false;
@@ -25,7 +24,7 @@ namespace AceLand.Library.Extensions
 
         public static IEnumerable<T> GetKeysByValue<T, W>(this Dictionary<T, W> dict, W val)
         {
-            foreach (KeyValuePair<T, W> pair in dict)
+            foreach (var pair in dict)
             {
                 if (EqualityComparer<W>.Default.Equals(pair.Value, val))
                 {
@@ -38,7 +37,8 @@ namespace AceLand.Library.Extensions
         {
             if (!dictionary.ContainsKey(key1) || !dictionary.ContainsKey(key2))
             {
-                throw new KeyNotFoundException("One or both keys do not exist in the dictionary.");
+                Debug.LogWarning("One or both keys do not exist in the dictionary.");
+                return;
             }
 
             var value1 = dictionary[key1];

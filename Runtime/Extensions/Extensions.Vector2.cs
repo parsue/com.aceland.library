@@ -3,65 +3,47 @@ using UnityEngine;
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
-    {        
-        public static Vector2 Remap(this Vector2 value, Vector2 from1, Vector2 to1, Vector2 from2, Vector2 to2)
-        {
-            var normalizedValueX = Mathf.InverseLerp(from1.x, to1.x, value.x);
-            var normalizedValueY = Mathf.InverseLerp(from1.y, to1.y, value.y);
+    {
+        public static Vector2 Remap(this Vector2 value, Vector2 from1, Vector2 to1, Vector2 from2, Vector2 to2) =>
+            new(
+                value.x.Remap(from1.x, to1.x, from2.x, to2.x),
+                value.y.Remap(from1.y, to1.y, from2.y, to2.y)
+            );
+          
+        public static Vector2 Remap01(this Vector2 value, Vector2 from1, Vector2 to1) =>
+            new(
+                value.x.Remap01(from1.x, to1.x),
+                value.y.Remap01(from1.y, to1.y)
+            );
+          
+        public static Vector2 RemapUnclamped(this Vector2 value, Vector2 from1, Vector2 to1, Vector2 from2, Vector2 to2) =>
+            new(
+                value.x.RemapUnclamped(from1.x, to1.x, from2.x, to2.x),
+                value.y.RemapUnclamped(from1.y, to1.y, from2.y, to2.y)
+            );
 
-            var remappedValueX = Mathf.Lerp(from2.x, to2.x, normalizedValueX);
-            var remappedValueY = Mathf.Lerp(from2.y, to2.y, normalizedValueY);
+        public static Vector2 Multiply(this Vector2 value, double scalar) => 
+            new Vector3((float)(value.x * scalar), (float)(value.y * scalar));
 
-            return new Vector2(remappedValueX, remappedValueY);
-        }
+        public static Vector2 YX(this Vector2 value) =>
+            new(value.y, value.x);
         
-        public static Vector2 yx(this Vector2 value)
-        {
-            return new Vector2(value.y, value.x);
-        }
-        
-        public static Vector2 x(this Vector2 value, float x)
-        {
-            var v = value;
-            v.x = x;
-            return v;
-        }
+        public static Vector2 X(this Vector2 value, float x) =>
+            new(x, value.y);
 
-        public static Vector2 y(this Vector2 value, float y)
-        {
-            var v = value;
-            v.y = y;
-            return v;
-        }
+        public static Vector2 Y(this Vector2 value, float y) =>
+            new(value.x, y);
 
-        public static Vector2 AdjX(this Vector2 value, float x)
-        {
-            var v = value;
-            v.x += x;
-            return v;
-        }
+        public static Vector2 AdjX(this Vector2 value, float x) =>
+            new(value.x + x, value.y);
 
-        public static Vector2 AdjY(this Vector2 value, float y)
-        {
-            var v = value;
-            v.y += y;
-            return v;
-        }
+        public static Vector2 AdjY(this Vector2 value, float y) =>
+            new(value.x, value.y + y);
 
-        public static Vector2 Adj(this Vector2 value, float x, float y)
-        {
-            var v = value;
-            v.x += x;
-            v.y += y;
-            return v;
-        }
+        public static Vector2 AdjXY(this Vector2 value, float x, float y) =>
+            new(value.x + x, value.y + y);
 
-        public static Vector2 Adj(this Vector2 value, float all)
-        {
-            var v = value;
-            v.x += all;
-            v.y += all;
-            return v;
-        }
+        public static Vector2 AdjAll(this Vector2 value, float all) =>
+            new(value.x + all, value.y + all);
     }
 }

@@ -1,20 +1,20 @@
-﻿namespace AceLand.Library.Editor.InspectorButton.Utils
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration.Assemblies;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using UnityEngine;
-    using UnityEngine.Assertions;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration.Assemblies;
+using System.Globalization;
+using System.Reflection;
+using System.Reflection.Emit;
+using UnityEngine;
+using UnityEngine.Assertions;
 
+namespace AceLand.Library.Editor.InspectorButton.Utils
+{
     internal static class ScriptableObjectCache
     {
-        private const string AssemblyName = "EasyButtons.DynamicAssembly";
+        private const string ASSEMBLY_NAME = "EasyButtons.DynamicAssembly";
 
-        private static readonly AssemblyBuilder _assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-            new AssemblyName(AssemblyName)
+        private static readonly AssemblyBuilder AssemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+            new AssemblyName(ASSEMBLY_NAME)
         {
             CultureInfo = CultureInfo.InvariantCulture,
             Flags = AssemblyNameFlags.None,
@@ -22,15 +22,15 @@
             VersionCompatibility = AssemblyVersionCompatibility.SameDomain
         }, AssemblyBuilderAccess.Run);
 
-        private static readonly ModuleBuilder _moduleBuilder = _assemblyBuilder.DefineDynamicModule(AssemblyName, true);
+        private static readonly ModuleBuilder ModuleBuilder = AssemblyBuilder.DefineDynamicModule(ASSEMBLY_NAME, true);
 
-        private static readonly Dictionary<string, Type> _classDict = new Dictionary<string, Type>();
+        private static readonly Dictionary<string, Type> ClassDict = new Dictionary<string, Type>();
 
         public static Type GetClass(string fieldName, Type fieldType)
         {
-            string _className = GetClassName(fieldName, fieldType);
+            var className = GetClassName(fieldName, fieldType);
 
-            if (_classDict.TryGetValue(_className, out Type classType))
+            if (ClassDict.TryGetValue(className, out var classType))
                 return classType;
 
             if ( ! fieldType.IsUnitySerializable())
@@ -38,34 +38,34 @@
                 fieldType = typeof(NonSerializedError);
             }
 
-            classType = CreateClass(_className, fieldName, fieldType);
-            _classDict[_className] = classType;
+            classType = CreateClass(className, fieldName, fieldType);
+            ClassDict[className] = classType;
             return classType;
         }
 
         private static Type CreateClass(string className, string fieldName, Type fieldType)
         {
-            TypeBuilder _typeBuilder = _moduleBuilder.DefineType(
-                $"{AssemblyName}.{className}",
+            var typeBuilder = ModuleBuilder.DefineType(
+                $"{ASSEMBLY_NAME}.{className}",
                 TypeAttributes.NotPublic,
                 typeof(ScriptableObject));
 
-            _typeBuilder.DefineField(fieldName, fieldType, FieldAttributes.Public);
-            Type _type = _typeBuilder.CreateType();
-            return _type;
+            typeBuilder.DefineField(fieldName, fieldType, FieldAttributes.Public);
+            var type = typeBuilder.CreateType();
+            return type;
         }
 
         private static string GetClassName(string fieldName, Type fieldType)
         {
-            string _fullTypeName = fieldType.FullName;
+            var fullTypeName = fieldType.FullName;
 
-            Assert.IsNotNull(_fullTypeName);
+            Assert.IsNotNull(fullTypeName);
 
-            string _classSafeTypeName = _fullTypeName
+            var classSafeTypeName = fullTypeName
                 .Replace('.', '_')
                 .Replace('`', '_');
 
-            return $"{_classSafeTypeName}_{fieldName}".CapitalizeFirstChar();
+            return $"{classSafeTypeName}_{fieldName}".CapitalizeFirstChar();
         }
     }
 }

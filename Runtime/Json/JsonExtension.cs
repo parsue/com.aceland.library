@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace AceLand.Library.Json
@@ -14,8 +15,14 @@ namespace AceLand.Library.Json
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             Converters = new List<JsonConverter>()
         };
+        
+        public static string ToJson<T>(this T data) =>
+            JsonConvert.SerializeObject(data, Formatting.None, JSON_SERIALIZER_SETTINGS);
+        
+        public static T ToData<T>(this string json) =>
+            JsonConvert.DeserializeObject<T>(json, JSON_SERIALIZER_SETTINGS);
 
-        public static Task<string> ToJson<T>(this T data, CancellationToken token)
+        public static Task<string> ToJsonAsync<T>(this T data, CancellationToken token)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -32,7 +39,7 @@ namespace AceLand.Library.Json
             }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
-        public static Task<T> ToData<T>(this string json, CancellationToken token)
+        public static Task<T> ToDataAsync<T>(this string json, CancellationToken token)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -48,7 +55,32 @@ namespace AceLand.Library.Json
             }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
-        public static Task<T> ToData<T>(this TextAsset json, CancellationToken token) =>
-            ToData<T>(json.text, token);
+        public static Task<T> ToDataAsync<T>(this TextAsset json, CancellationToken token) =>
+            ToDataAsync<T>(json.text, token);
+        
+        public static bool IsValidJson(this string json)
+        {
+            if (json == null) return false;
+            if (json.Trim() == string.Empty) return true; 
+            
+            try
+            {
+                JToken.Parse(json);
+                return true;
+            }
+            catch (JsonReaderException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        
+        public static bool IsValidJson(this TextAsset json)
+        {
+            return IsValidJson(json.text);
+        }
     }
 }

@@ -1,15 +1,13 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
-{
-    using AceLand.Library.Attribute;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using UnityEditor;
-    using UnityEngine;
-    using Utils;
-    using Object = UnityEngine.Object;
-
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using AceLand.Library.Attribute;
+using AceLand.Library.Editor.InspectorButton.Utils;
+using UnityEngine;
+using Object = UnityEngine.Object;
+    
+namespace AceLand.Library.Editor.InspectorButton
+    {
     internal class InspectorButtonWithParams : InspectorButton
     {
         private readonly Parameter[] _parameters;
@@ -24,21 +22,21 @@
 
         protected override void DrawInternal(IEnumerable<object> targets)
         {
-            (Rect foldoutRect, Rect buttonRect) = DrawUtility.GetFoldoutAndButtonRects(DisplayName);
+            var (foldoutRect, buttonRect) = DrawUtility.GetFoldoutAndButtonRects(DisplayName);
 
             _expanded = DrawUtility.DrawInFoldout(foldoutRect, _expanded, DisplayName, () =>
             {
-                foreach (Parameter param in _parameters)
+                foreach (var param in _parameters)
                     param.Draw();
             });
 
             if ( ! GUI.Button(buttonRect, "Invoke"))
                 return;
 
-            var _paramValues = _parameters.Select(param => param.Value).ToArray();
+            var paramValues = _parameters.Select(param => param.Value).ToArray();
 
-            foreach (object obj in targets)
-                Method.Invoke(obj, _paramValues);
+            foreach (var obj in targets)
+                Method.Invoke(obj, paramValues);
         }
 
         private readonly struct Parameter
@@ -49,9 +47,9 @@
 
             public Parameter(ParameterInfo paramInfo)
             {
-                Type _generatedType = ScriptableObjectCache.GetClass(paramInfo.Name, paramInfo.ParameterType);
-                _scriptableObj = ScriptableObject.CreateInstance(_generatedType);
-                _fieldInfo = _generatedType.GetField(paramInfo.Name);
+                var generatedType = ScriptableObjectCache.GetClass(paramInfo.Name, paramInfo.ParameterType);
+                _scriptableObj = ScriptableObject.CreateInstance(generatedType);
+                _fieldInfo = generatedType.GetField(paramInfo.Name);
                 _editor = CreateEditor<NoScriptFieldEditor>(_scriptableObj);
             }
 
@@ -69,9 +67,9 @@
                 _editor.OnInspectorGUI();
             }
 
-            private static TEditor CreateEditor<TEditor>(Object obj) where TEditor : Editor
+            private static TEditor CreateEditor<TEditor>(Object obj) where TEditor : UnityEditor.Editor
             {
-                return (TEditor) Editor.CreateEditor(obj, typeof(TEditor));
+                return (TEditor) UnityEditor.Editor.CreateEditor(obj, typeof(TEditor));
             }
         }
     }

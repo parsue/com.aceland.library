@@ -4,9 +4,8 @@ namespace AceLand.Library.Utils
 {
     public static partial class Helper
     {      
-        public static GameObject CreateEmptyInHierarchy(string name, Transform parent = null)
-        {
-            return new GameObject()
+        public static GameObject CreateEmptyInHierarchy(string name, Transform parent = null) =>
+            new()
             {
                 name = name,
                 transform =
@@ -17,6 +16,5 @@ namespace AceLand.Library.Utils
                     localScale = Vector3.one,
                 }
             };
-        }
     }
 }

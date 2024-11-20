@@ -31,51 +31,61 @@ namespace AceLand.Library.Editor.ConditionalShowProperty
 
         private bool GetConditionalShowAttributeResult(ConditionalShowAttribute baseAttr, SerializedProperty property)
         {
-            if (baseAttr.IsValidator && baseAttr.Validator is not null) return baseAttr.Validator.Invoke();
+            var sourceBoolProperty = property.serializedObject.FindProperty(baseAttr.BoolFieldName);
+            var sourceEnumProperty = property.serializedObject.FindProperty(baseAttr.EnumFieldName);
 
-            var sourceProperty = property.serializedObject.FindProperty(baseAttr.FieldName);
-
-            if (sourceProperty is not null) return CheckPropertyType(baseAttr, sourceProperty);
-            
-            if (baseAttr.FieldNames == null || baseAttr.FieldNames.Length == 0) return false;
-                
-            foreach (var fieldName in baseAttr.FieldNames)
+            if (sourceBoolProperty is not null && sourceEnumProperty is not null)
             {
-                sourceProperty = property.serializedObject.FindProperty(fieldName);
-                if (sourceProperty is null) return false;
-                if (!CheckPropertyType(baseAttr, sourceProperty)) return false;
+                return CheckBoolPropertyType(baseAttr, sourceBoolProperty) &&
+                       CheckEnumPropertyType(baseAttr, sourceEnumProperty);
+            }
+
+            if (sourceBoolProperty is not null || sourceEnumProperty is not null)
+            {
+                return CheckBoolPropertyType(baseAttr, sourceBoolProperty) ||
+                       CheckEnumPropertyType(baseAttr, sourceEnumProperty);
+            }
+            
+            if (baseAttr.BoolFieldNames == null || baseAttr.BoolFieldNames.Length == 0) return false;
+                
+            foreach (var fieldName in baseAttr.BoolFieldNames)
+            {
+                sourceBoolProperty = property.serializedObject.FindProperty(fieldName);
+                if (sourceBoolProperty is null) return false;
+                if (!CheckBoolPropertyType(baseAttr, sourceBoolProperty)) return false;
             }
 
             return true;
 
         }
 
-        private bool CheckPropertyType(ConditionalShowAttribute condHAtt, SerializedProperty property)
+        private bool CheckBoolPropertyType(ConditionalShowAttribute condHAtt, SerializedProperty boolProperty)
         {
-            switch (property.propertyType)
+            if (boolProperty?.propertyType is not SerializedPropertyType.Boolean) return false;
+            
+            return boolProperty.boolValue == condHAtt.BoolValue;
+        }
+        
+        private bool CheckEnumPropertyType(ConditionalShowAttribute condHAtt, SerializedProperty enumProperty)
+        {
+            if (enumProperty?.propertyType is not SerializedPropertyType.Enum) return false;
+            if (condHAtt.EnumIndex == null) return true;
+            
+            foreach (var index in condHAtt.EnumIndex)
             {
-                case SerializedPropertyType.Boolean:
-                    return property.boolValue == condHAtt.BoolValue;
-
-                case SerializedPropertyType.Enum:
-                    foreach (var index in condHAtt.EnumIndex)
-                    {
-                        if (condHAtt.IsFlag)
-                        {
-                            if ((property.enumValueIndex & index) == 1)
-                                return true;
-                        }
-                        else
-                        {
-                            if (property.enumValueIndex == index)
-                                return true;
-                        }
-                    }
-                    return false;
-
-                default:
-                    throw new Exception("Data type of the property used for conditional hiding [" + property.propertyType + "] is currently not supported");
+                if (condHAtt.IsFlag)
+                {
+                    if ((enumProperty.enumValueIndex & index) == 1)
+                        return true;
+                }
+                else
+                {
+                    if (enumProperty.enumValueIndex == index)
+                        return true;
+                }
             }
+            
+            return false;
         }
     }
 }

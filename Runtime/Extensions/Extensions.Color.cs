@@ -3,59 +3,43 @@ using UnityEngine;
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
-    {        
+    {
         private static readonly Vector3 DESATUATION_VALUE = new(0.2126f, 0.7152f, 0.0722f);
 
-        public static float Brightness(this Color value)
-        {
-            return value.r * DESATUATION_VALUE.x + value.g * DESATUATION_VALUE.y + value.b * DESATUATION_VALUE.z;
-        }
+        public static float Brightness(this Color value) =>
+            value.r * DESATUATION_VALUE.x + value.g * DESATUATION_VALUE.y + value.b * DESATUATION_VALUE.z;
 
-        public static Color r(this Color value, float r)
-        {
-            var c1 = value;
-            c1.r = r;
-            return c1;
-        }
+        public static Color Mono(this Color value) =>
+            new(value.r * DESATUATION_VALUE.x, value.g * DESATUATION_VALUE.y, value.b * DESATUATION_VALUE.z);
 
-        public static Color g(this Color value, float g)
-        {
-            var c1 = value;
-            c1.g = g;
-            return c1;
-        }
+        public static Color R(this Color value, float r) =>
+            new(r, value.g, value.b, value.a);
+        
+        public static Color G(this Color value, float g) =>
+            new(value.r, g, value.b, value.a);
+        
+        public static Color B(this Color value, float b) =>
+            new(value.r, value.g, b, value.a);
+        
+        public static Color A(this Color value, float a) =>
+            new(value.r, value.g, value.b, a);
 
-        public static Color b(this Color value, float b)
-        {
-            var c1 = value;
-            c1.b = b;
-            return c1;
-        }
+        public static Color RG(this Color value, float r, float g) =>
+            new(r, g, value.b, value.a);
 
-        public static Color a(this Color value, float a)
-        {
-            var c1 = value;
-            c1.a = a;
-            return c1;
-        }
+        public static Color RB(this Color value, float r, float b) =>
+            new(r, value.g, b, value.a);
 
-        public static Color all(this Color value, float all)
-        {
-            var c1 = value;
-            c1.r = all;
-            c1.g = all;
-            c1.b = all;
-            return c1;
-        }
+        public static Color GB(this Color value, float g, float b) =>
+            new(value.r, g, b, value.a);
 
-        public static Color all(this Color value, float all, float a)
-        {
-            var c1 = value;
-            c1.r = all;
-            c1.g = all;
-            c1.b = all;
-            c1.a = a;
-            return c1;
-        }
+        public static Color RGA(this Color value, float r, float g, float a) =>
+            new(r, g, value.b, a);
+
+        public static Color RBA(this Color value, float r, float b, float a) =>
+            new(r, value.g, b, a);
+
+        public static Color GBA(this Color value, float g, float b, float a) =>
+            new(value.r, g, b, a);
     }
 }

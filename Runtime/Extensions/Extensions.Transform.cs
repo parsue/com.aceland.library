@@ -5,6 +5,12 @@ namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
+        public static void CopyDataFrom(this Transform transform, Transform source, bool copyScale = false)
+        {
+            transform.SetPositionAndRotation(source.position, source.rotation);
+            if (copyScale) transform.localScale = source.localScale;
+        }
+        
         public static void DestroyAllChildren(this Transform transform)
         {
             while (transform.childCount > 0)
@@ -15,10 +21,8 @@ namespace AceLand.Library.Extensions
             }
         }
         
-        public static void DestroyAllChildren(this MonoBehaviour mono)
-        {
+        public static void DestroyAllChildren(this MonoBehaviour mono) =>
             DestroyAllChildren(mono.transform);
-        }
 
         public static void DestroyAllChildren<T>(this Transform transform) where T : MonoBehaviour
         {
@@ -36,15 +40,7 @@ namespace AceLand.Library.Extensions
             }
         }
         
-        public static void DestroyAllChildren<T>(this MonoBehaviour mono) where T : MonoBehaviour
-        {
+        public static void DestroyAllChildren<T>(this MonoBehaviour mono) where T : MonoBehaviour =>
             DestroyAllChildren<T>(mono.transform);
-        }
-
-        public static void CopyDataFrom(this Transform transform, Transform source, bool copyScale = false)
-        {
-            transform.SetPositionAndRotation(source.position, source.rotation);
-            if (copyScale) transform.localScale = source.localScale;
-        }
     }
 }

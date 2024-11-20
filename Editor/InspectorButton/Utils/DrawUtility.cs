@@ -1,22 +1,22 @@
-﻿namespace AceLand.Library.Editor.InspectorButton.Utils
-{
-    using System;
-    using UnityEditor;
-    using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
 
+namespace AceLand.Library.Editor.InspectorButton.Utils
+{
     internal static class DrawUtility
     {
-        private static readonly GUIContent _tempContent = new GUIContent();
+        private static readonly GUIContent TEMP_CONTENT = new GUIContent();
 
         public readonly struct VerticalIndent : IDisposable
         {
-            private const float SpacingHeight = 10f;
+            private const float SPACING_HEIGHT = 10f;
             private readonly bool _bottom;
 
             public VerticalIndent(bool top, bool bottom)
             {
                 if (top)
-                    GUILayout.Space(SpacingHeight);
+                    GUILayout.Space(SPACING_HEIGHT);
 
                 _bottom = bottom;
             }
@@ -24,7 +24,7 @@
             public void Dispose()
             {
                 if (_bottom)
-                    GUILayout.Space(SpacingHeight);
+                    GUILayout.Space(SPACING_HEIGHT);
             }
         }
 
@@ -48,27 +48,27 @@
         {
             const float buttonWidth = 60f;
 
-            Rect _foldoutWithoutButton = GUILayoutUtility.GetRect(TempContent(header), EditorStyles.foldoutHeader);
+            var foldoutWithoutButton = GUILayoutUtility.GetRect(TempContent(header), EditorStyles.foldoutHeader);
 
             var foldoutRect = new Rect(
-                _foldoutWithoutButton.x,
-                _foldoutWithoutButton.y,
-                _foldoutWithoutButton.width - buttonWidth,
-                _foldoutWithoutButton.height);
+                foldoutWithoutButton.x,
+                foldoutWithoutButton.y,
+                foldoutWithoutButton.width - buttonWidth,
+                foldoutWithoutButton.height);
 
             var buttonRect = new Rect(
-                _foldoutWithoutButton.xMax - buttonWidth,
-                _foldoutWithoutButton.y,
+                foldoutWithoutButton.xMax - buttonWidth,
+                foldoutWithoutButton.y,
                 buttonWidth,
-                _foldoutWithoutButton.height);
+                foldoutWithoutButton.height);
 
             return (foldoutRect, buttonRect);
         }
 
         private static GUIContent TempContent(string text)
         {
-            _tempContent.text = text;
-            return _tempContent;
+            TEMP_CONTENT.text = text;
+            return TEMP_CONTENT;
         }
     }
 }

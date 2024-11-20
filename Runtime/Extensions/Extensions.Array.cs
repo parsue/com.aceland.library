@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 
 namespace AceLand.Library.Extensions
 {
@@ -6,11 +6,13 @@ namespace AceLand.Library.Extensions
     {
         public static void SwapElements<T>(this T[] array, int index1, int index2)
         {
-            if (index1 < 0 || index1 >= array.Length || index2 < 0 || index2 >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException("Indices must be within the array bounds.");
-            }
-
+            var lastIndex = array.Length - 1;
+            if (index1 < 0 || index1 > lastIndex)
+                index1 = Mathf.Clamp(index1, 0, array.Length - 1);
+            if (index2 < 0 || index2 > lastIndex)
+                index2 = Mathf.Clamp(index2, 0, array.Length - 1);
+            
+            if (index1 == index2) return;
             (array[index1], array[index2]) = (array[index2], array[index1]);
         }
     }

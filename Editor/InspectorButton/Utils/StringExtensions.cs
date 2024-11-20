@@ -1,7 +1,7 @@
-﻿namespace AceLand.Library.Editor.InspectorButton.Utils
-{
-    using System;
+﻿using System;
 
+namespace AceLand.Library.Editor.InspectorButton.Utils
+{
     internal static class StringExtensions
     {
         public static string CapitalizeFirstChar(this string input)
@@ -9,14 +9,14 @@
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            char _firstChar = input[0];
+            var firstChar = input[0];
 
-            if (char.IsUpper(_firstChar))
+            if (char.IsUpper(firstChar))
                 return input;
 
-            var _chars = input.ToCharArray();
-            _chars[0] = char.ToUpper(_firstChar);
-            return new string(_chars);
+            var chars = input.ToCharArray();
+            chars[0] = char.ToUpper(firstChar);
+            return new string(chars);
         }
     }
 }

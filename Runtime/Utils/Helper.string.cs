@@ -3,21 +3,13 @@ using System.Text;
 
 namespace AceLand.Library.Utils
 {
-    public enum CharacterType
-    {
-        FullCharacters,
-        Characters,
-        Letters,
-        Digits,
-    }
-    
     public static partial class Helper
     {
-        public const string FULL_CHARACTERS = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\;',./~!@#$%^&*()_+{}|:""<>?";
-        public const string CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        public const string LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public const string DIGITS = "0123456789";
-        public const char SLASH = '\\';
+        private const string FULL_CHARACTERS = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\;',./~!@#$%^&*()_+{}|:""<>?";
+        private const string CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private const string LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string DIGITS = "0123456789";
+        private const char SLASH = '\\';
 
         public static string GetRandomString(int length, CharacterType type = CharacterType.Characters)
         {

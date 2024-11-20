@@ -10,10 +10,8 @@ namespace AceLand.Library.Utils
 {
     public static partial class Helper
     {
-        public static bool IsOverUIElement(Vector2 screenPosition, int displayIndex = 0)
-        {
-            return IsPointerOverUIElement(GetEventSystemRaycastResults(screenPosition, displayIndex));
-        }
+        public static bool IsOverUIElement(Vector2 screenPosition, int displayIndex = 0) =>
+            IsPointerOverUIElement(GetEventSystemRaycastResults(screenPosition, displayIndex));
         
         private static bool IsPointerOverUIElement(IEnumerable<RaycastResult> eventSystemRaycastResults)
         {

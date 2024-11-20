@@ -1,11 +1,11 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
-{
-    using UnityEditor;
-    using Object = UnityEngine.Object;
+﻿using UnityEditor;
+using Object = UnityEngine.Object;
 
+namespace AceLand.Library.Editor.InspectorButton
+{
     [CustomEditor(typeof(Object), true)]
     [CanEditMultipleObjects]
-    internal class ObjectEditor : Editor
+    internal class ObjectEditor : UnityEditor.Editor
     {
         private InspectorButtonsDrawer _buttonsDrawer;
 

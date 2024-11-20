@@ -23,6 +23,8 @@ namespace AceLand.Library.ProjectSetting
             AssetDatabase.CreateAsset(settings, fullPath);
             AssetDatabase.SaveAssets();
             
+            Debug.Log($"Create Project Settings in {PATH} : {nameof(T)}");
+            
             return settings;
         }
         

@@ -10,14 +10,6 @@
         DisabledInPlayMode
     }
 
-    [Flags]
-    public enum InspectorButtonSpacing
-    {
-        None = 0,
-        Before = 1,
-        After = 2
-    }
-
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class InspectorButtonAttribute : Attribute
     {

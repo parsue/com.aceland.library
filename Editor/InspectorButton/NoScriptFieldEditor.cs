@@ -1,31 +1,29 @@
-﻿namespace AceLand.Library.Editor.InspectorButton
-{
-    using System;
-    using System.Reflection;
-    using UnityEditor;
-    using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
 
-    internal class NoScriptFieldEditor : Editor
+namespace AceLand.Library.Editor.InspectorButton
+{
+    internal class NoScriptFieldEditor : UnityEditor.Editor
     {
-        private static readonly MethodInfo _removeLogEntriesByMode;
-        private static readonly string[] _propertiesToExclude = { "m_Script" };
+        private static readonly MethodInfo RemoveLogEntriesByMode;
+        private static readonly string[] PropertiesToExclude = { "m_Script" };
 
         static NoScriptFieldEditor()
         {
             const string logEntryClassName = "UnityEditor.LogEntry";
             const string removeLogMethodName = "RemoveLogEntriesByMode";
 
-            var _editorAssembly = Assembly.GetAssembly(typeof(Editor));
-            Type logEntryType = _editorAssembly.GetType(logEntryClassName);
-            _removeLogEntriesByMode = logEntryType.GetMethod(removeLogMethodName, BindingFlags.NonPublic | BindingFlags.Static);
+            var editorAssembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
+            var logEntryType = editorAssembly.GetType(logEntryClassName);
+            RemoveLogEntriesByMode = logEntryType.GetMethod(removeLogMethodName, BindingFlags.NonPublic | BindingFlags.Static);
 
-            if (_removeLogEntriesByMode == null)
+            if (RemoveLogEntriesByMode == null)
                 Debug.LogError($"Could not find the {logEntryClassName}.{removeLogMethodName}() method. ");
         }
 
         public override void OnInspectorGUI()
         {
-            DrawPropertiesExcluding(serializedObject, _propertiesToExclude);
+            DrawPropertiesExcluding(serializedObject, PropertiesToExclude);
         }
 
         public void ApplyModifiedProperties()
@@ -43,7 +41,7 @@
                 return;
 
             const int noScriptAssetMode = 262144;
-            _removeLogEntriesByMode?.Invoke(null, new object[] { noScriptAssetMode });
+            RemoveLogEntriesByMode?.Invoke(null, new object[] { noScriptAssetMode });
         }
     }
 }
