@@ -17,9 +17,9 @@
 #if UNITY_EDITOR
                 return BuildLevel.Editor;
 #elif DEBUG
-                return BuildLevel.DevelopmentBuild;
+                return BuildLevel.Development;
 #else
-                return BuildLevel.Build;
+                return BuildLevel.Production;
 #endif
             }
         }
@@ -29,9 +29,9 @@
 #if UNITY_EDITOR
             return level >= BuildLevel.Editor;
 #elif DEBUG
-            return level >= BuildLevel.DevelopmentBuild;
+                return BuildLevel.Development;
 #else
-            return level >= BuildLevel.Build;
+                return BuildLevel.Production;
 #endif
         }
 
@@ -41,9 +41,9 @@
 #if UNITY_EDITOR
             return level <= BuildLevel.Editor;
 #elif DEBUG
-            return level <= BuildLevel.DevelopmentBuild;
+                return BuildLevel.Development;
 #else
-            return level <= BuildLevel.Build;
+                return BuildLevel.Production;
 #endif
         }
 
@@ -53,9 +53,9 @@
 #if UNITY_EDITOR
             return level == BuildLevel.Editor;
 #elif DEBUG
-            return level == BuildLevel.DevelopmentBuild;
+                return BuildLevel.Development;
 #else
-            return level == BuildLevel.Build;
+                return BuildLevel.Production;
 #endif
         }
     }
