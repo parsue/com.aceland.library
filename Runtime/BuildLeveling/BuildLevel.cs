@@ -26,12 +26,13 @@
 
         public static bool IsAcceptedLevel(this BuildLevel level)
         {
+            if (level == BuildLevel.None) return false;
 #if UNITY_EDITOR
             return level >= BuildLevel.Editor;
 #elif DEBUG
-                return BuildLevel.Development;
+            return level >= BuildLevel.Development;
 #else
-                return BuildLevel.Production;
+            return level >= BuildLevel.Production;
 #endif
         }
 
@@ -41,9 +42,9 @@
 #if UNITY_EDITOR
             return level <= BuildLevel.Editor;
 #elif DEBUG
-                return BuildLevel.Development;
+            return level <= BuildLevel.Development;
 #else
-                return BuildLevel.Production;
+            return level <= BuildLevel.Production;
 #endif
         }
 
@@ -53,9 +54,9 @@
 #if UNITY_EDITOR
             return level == BuildLevel.Editor;
 #elif DEBUG
-                return BuildLevel.Development;
+            return level == BuildLevel.Development;
 #else
-                return BuildLevel.Production;
+            return level == BuildLevel.Production;
 #endif
         }
     }
