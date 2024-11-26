@@ -29,10 +29,7 @@ namespace AceLand.Library.Editor.Providers
             using var change = new EditorGUI.ChangeCheckScope();
             Undo.RecordObject(Settings.targetObject, "Apply Changes");
                 
-            foreach (var property in EditorHelper.GetProperties(Settings))
-            {
-                EditorGUILayout.PropertyField(property, true);
-            }
+            EditorHelper.DrawAllProperties(Settings);
             EditorGUILayout.Space(20f);
         
             if (change.changed)
