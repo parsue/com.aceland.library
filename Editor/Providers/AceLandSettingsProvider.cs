@@ -24,15 +24,21 @@ namespace AceLand.Library.Editor.Providers
 
         public override void OnGUI(string searchContext)
         {
-            EditorGUI.BeginChangeCheck();
+            Settings.Update();
             
-            EditorHelper.DrawAllProperties(Settings);
-            EditorGUILayout.Space(20f);
-            
-            if (EditorGUI.EndChangeCheck())
+            using var change = new EditorGUI.ChangeCheckScope();
+            Undo.RecordObject(Settings.targetObject, "Apply Changes");
+                
+            foreach (var property in EditorHelper.GetProperties(Settings))
             {
-                Undo.RecordObject(Settings.targetObject, "Apply Changes");
+                EditorGUILayout.PropertyField(property, true);
+            }
+            EditorGUILayout.Space(20f);
+        
+            if (change.changed)
+            {
                 Settings.ApplyModifiedProperties();
+                EditorUtility.SetDirty(Settings.targetObject);
             }
             else
             {
