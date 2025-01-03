@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.7] - 2025-01-3
+
+### Modify
+- [Json] Add option to use withTypeName settings
+
 ## [1.0.6] - 2024-11-26
 
 ### Modify
