@@ -16,19 +16,33 @@ namespace AceLand.Library.Json
             Converters = new List<JsonConverter>()
         };
         
-        public static string ToJson<T>(this T data) =>
-            JsonConvert.SerializeObject(data, Formatting.None, JSON_SERIALIZER_SETTINGS);
-        
-        public static T ToData<T>(this string json) =>
-            JsonConvert.DeserializeObject<T>(json, JSON_SERIALIZER_SETTINGS);
+        private static readonly JsonSerializerSettings JSON_SERIALIZER_SETTINGS_WITH_TYPE = new()
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Converters = new List<JsonConverter>()
+        };
 
-        public static Task<string> ToJsonAsync<T>(this T data, CancellationToken token)
+        public static string ToJson<T>(this T data, bool withTypeName = false)
+        {
+            var settings = withTypeName ? JSON_SERIALIZER_SETTINGS_WITH_TYPE : JSON_SERIALIZER_SETTINGS;
+            return JsonConvert.SerializeObject(data, Formatting.None, settings);
+        }
+
+        public static T ToData<T>(this string json, bool withTypeName = false)
+        {
+            var settings = withTypeName ? JSON_SERIALIZER_SETTINGS_WITH_TYPE : JSON_SERIALIZER_SETTINGS;
+            return JsonConvert.DeserializeObject<T>(json, settings);
+        }
+
+        public static Task<string> ToJsonAsync<T>(this T data, CancellationToken token, bool withTypeName = false)
         {
             return Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    var json = JsonConvert.SerializeObject(data, Formatting.None, JSON_SERIALIZER_SETTINGS);
+                    var settings = withTypeName ? JSON_SERIALIZER_SETTINGS_WITH_TYPE : JSON_SERIALIZER_SETTINGS;
+                    var json = JsonConvert.SerializeObject(data, Formatting.None, settings);
                     return json;
                 }
                 catch (Exception e)
@@ -39,13 +53,14 @@ namespace AceLand.Library.Json
             }, token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
-        public static Task<T> ToDataAsync<T>(this string json, CancellationToken token)
+        public static Task<T> ToDataAsync<T>(this string json, CancellationToken token, bool withTypeName = false)
         {
             return Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    var data = JsonConvert.DeserializeObject<T>(json, JSON_SERIALIZER_SETTINGS);
+                    var settings = withTypeName ? JSON_SERIALIZER_SETTINGS_WITH_TYPE : JSON_SERIALIZER_SETTINGS;
+                    var data = JsonConvert.DeserializeObject<T>(json, settings);
                     return data;
                 }
                 catch (Exception e)
