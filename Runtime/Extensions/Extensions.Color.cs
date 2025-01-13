@@ -4,13 +4,13 @@ namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        private static readonly Vector3 DESATUATION_VALUE = new(0.2126f, 0.7152f, 0.0722f);
+        private static readonly Vector3 DesatuationValue = new(0.2126f, 0.7152f, 0.0722f);
 
         public static float Brightness(this Color value) =>
-            value.r * DESATUATION_VALUE.x + value.g * DESATUATION_VALUE.y + value.b * DESATUATION_VALUE.z;
+            value.r * DesatuationValue.x + value.g * DesatuationValue.y + value.b * DesatuationValue.z;
 
         public static Color Mono(this Color value) =>
-            new(value.r * DESATUATION_VALUE.x, value.g * DESATUATION_VALUE.y, value.b * DESATUATION_VALUE.z);
+            new(value.r * DesatuationValue.x, value.g * DesatuationValue.y, value.b * DesatuationValue.z);
 
         public static Color R(this Color value, float r) =>
             new(r, value.g, value.b, value.a);
