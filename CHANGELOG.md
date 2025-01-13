@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.8] - 2025-01-13
+
+### Add
+- [Extension] Texture2D.Resize(int targetWidth, int targetHeight)
+- [Extension] Texture2D.Resize(int maxSize)
+- [Extension] Texture2D.CropAndResizeToSquare(int squareSize)
+- [Extension] Color[].ResizePixels(int originalWidth, int originalHeight, int newWidth, int newHeight)
+
 ## [1.0.7] - 2025-01-3
 
 ### Modify
