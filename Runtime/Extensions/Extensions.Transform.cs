@@ -13,9 +13,12 @@ namespace AceLand.Library.Extensions
         
         public static void DestroyAllChildren(this Transform transform)
         {
-            while (transform.childCount > 0)
+            var children = new List<GameObject>();
+            for (int i = 0; i < transform.childCount; i++)
+                children.Add(transform.GetChild(i).gameObject);
+
+            foreach (var child in children)
             {
-                var child = transform.GetChild(0).gameObject;
                 if (Application.isPlaying) Object.Destroy(child);
                 else Object.DestroyImmediate(child);
             }
