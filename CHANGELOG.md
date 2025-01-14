@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.9] - 2025-01-14
+
+### Fix
+- [Extension] Transform.DestroyAllChildren will loop to dead. It's cause Editor is not updating the Transform.childCount on child destroyed.
+
 ## [1.0.8] - 2025-01-13
 
 ### Add
