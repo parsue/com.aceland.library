@@ -13,17 +13,17 @@ namespace AceLand.Library.Mono
     public abstract class Singleton<T> : Singleton
         where T : Singleton<T>
     {
-        private static T _instance;
+        public static T Instance { get; private set; }
 
         protected virtual void Awake()
         {
-            if (_instance != null)
+            if (Instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _instance = GetComponent<T>();
+            Instance = GetComponent<T>();
             transform.parent = null;
             DontDestroyOnLoad(this);
         }

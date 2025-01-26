@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.10] - 2025-01-25
+
+### Modify
+- [Mono] Make Singleton Instance public.
+- [BuildLeveling] Separate files by classes.
+
 ## [1.0.9] - 2025-01-14
 
 ### Fix
