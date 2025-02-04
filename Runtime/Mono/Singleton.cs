@@ -24,7 +24,7 @@ namespace AceLand.Library.Mono
             }
 
             Instance = GetComponent<T>();
-            transform.parent = null;
+            transform.SetParent(null);
             DontDestroyOnLoad(this);
         }
     }
