@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.11] - 2025-02-04
+
+### Modify
+- [Mono] use SetParent() in Singleton.
+
 ## [1.0.10] - 2025-01-25
 
 ### Modify
