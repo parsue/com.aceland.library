@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace AceLand.Library.DataTools
@@ -10,7 +9,7 @@ namespace AceLand.Library.DataTools
             if (requestLength <= 0) yield break;
 
             DataUnion32 dataUnion = new();
-            var valueLength = (byte)Convert.ToString(startValue, 2).Length;
+            var valueLength = GetBinaryLength(startValue);
             var shift = (byte)(32 - valueLength);
 
             var firstState = (startValue << shift) | 1;
@@ -29,6 +28,17 @@ namespace AceLand.Library.DataTools
                 count++;
                 yield return dataUnion.Byte;
             } while (count < requestLength && firstState != nextState);
+        }
+        
+        public static byte GetBinaryLength(uint value)
+        {
+            byte length = 0;
+            while (value > 0)
+            {
+                length++;
+                value >>= 1;
+            }
+            return length > 0 ? length : (byte)1;
         }
     }
 }
