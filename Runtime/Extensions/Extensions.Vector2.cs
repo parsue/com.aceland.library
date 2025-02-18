@@ -23,7 +23,19 @@ namespace AceLand.Library.Extensions
             );
 
         public static Vector2 Multiply(this Vector2 value, double scalar) => 
-            new Vector3((float)(value.x * scalar), (float)(value.y * scalar));
+            new Vector2((float)(value.x * scalar), (float)(value.y * scalar));
+
+        public static Vector3 Z(this Vector2 value, float z = 0) =>
+            new Vector3(value.x, value.y, z);
+
+        public static Vector4 ZW(this Vector2 value, float z = 0, float w = 0) =>
+            new Vector4(value.x, value.y, z, w);
+
+        public static Vector3 YXZ(this Vector2 value, float z = 0) =>
+            new Vector3(value.y, value.x, z);
+
+        public static Vector4 YXZW(this Vector2 value, float z = 0, float w = 0) =>
+            new Vector4(value.y, value.x, z, w);
 
         public static Vector2 YX(this Vector2 value) =>
             new(value.y, value.x);
