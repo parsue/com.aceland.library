@@ -14,6 +14,18 @@ namespace AceLand.Library.Extensions
             };
         }
 
+        public static int SnapToCeil(this int value, snapValue)
+        {
+            var i = value / snapValue;
+            Mathf.CeilToInt(i) * snapValue;
+        }
+
+        public static int SnapToFloor(this int value, snapValue)
+        {
+            var i = value / snapValue;
+            Mathf.FloorToInt(i) * snapValue;
+        }
+
         public static int RemapInt(this int value, float from1, float to1, float from2, float to2)
         {
             if (Mathf.Approximately(to2, from2)) return (int)to2;
