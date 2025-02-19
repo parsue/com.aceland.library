@@ -7,6 +7,18 @@ namespace AceLand.Library.Extensions
     {
         private static readonly Random Rnd = new();
 
+        public static Bounds GetBounds(this RectTransform rectTransform)
+        {
+            var corners = new Vector3[4];
+            rectTransform.GetWorldCorners(corners);
+            
+            var bounds = new Bounds(corners[0], Vector3.zero);
+            for (var i = 1; i < corners.Length; i++)
+                bounds.Encapsulate(corners[i]);
+
+            return bounds;
+        }
+
         public static Vector3 RandomPoint(this Bounds bounds)
         {
             Vector3 point = new(bounds.min.x - 10, bounds.min.y - 10, bounds.min.z -10);
