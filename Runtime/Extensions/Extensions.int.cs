@@ -14,16 +14,14 @@ namespace AceLand.Library.Extensions
             };
         }
 
-        public static int SnapToCeil(this int value, snapValue)
+        public static int SnapToCeil(this int value, int snapValue)
         {
-            var i = value / snapValue;
-            Mathf.CeilToInt(i) * snapValue;
+            Mathf.CeilToInt(value / snapValue) * snapValue;
         }
 
-        public static int SnapToFloor(this int value, snapValue)
+        public static int SnapToFloor(this int value, int snapValue)
         {
-            var i = value / snapValue;
-            Mathf.FloorToInt(i) * snapValue;
+            Mathf.FloorToInt(value / snapValue) * snapValue;
         }
 
         public static int RemapInt(this int value, float from1, float to1, float from2, float to2)
