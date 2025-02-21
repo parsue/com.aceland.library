@@ -25,6 +25,18 @@ namespace AceLand.Library.Extensions
         public static Vector2 Multiply(this Vector2 value, double scalar) => 
             new Vector2((float)(value.x * scalar), (float)(value.y * scalar));
 
+        public static Vector2 Average(Vector2[] vectors)
+        {
+            if (vectors == null || vectors.Length == 0)
+                return Vector2.zero;
+    
+            Vector2 sum = Vector2.zero;
+            foreach (var vector in vectors)
+                sum += vector;
+    
+            return sum / vectors.Length;
+        }
+
         public static Vector3 Z(this Vector2 value, float z = 0) =>
             new Vector3(value.x, value.y, z);
 
