@@ -5,7 +5,7 @@ namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        public static Bounds GetBounds(this RectTransform rectTransform)
+        public static Bounds ToBounds(this RectTransform rectTransform)
         {
             var corners = new Vector3[4];
             rectTransform.GetWorldCorners(corners);
@@ -17,7 +17,7 @@ namespace AceLand.Library.Extensions
             return bounds;
         }
 
-        public static Bounds WorldBounds(this RectTransform rectTransform)
+        public static Bounds ToWorldBounds(this RectTransform rectTransform)
         {
             var corners = new Vector3[4];
             rectTransform.GetWorldCorners(corners);
