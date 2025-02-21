@@ -4,8 +4,6 @@ namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        private static readonly Vector3 DesatuationValue = new(0.2126f, 0.7152f, 0.0722f);
-
         public static float Brightness(this Color value) =>
             value.r * DesatuationValue.x + value.g * DesatuationValue.y + value.b * DesatuationValue.z;
 
