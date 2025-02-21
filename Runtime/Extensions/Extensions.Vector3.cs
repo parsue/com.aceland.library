@@ -31,9 +31,9 @@ namespace AceLand.Library.Extensions
         public static Vector3 Average(Vector3[] vectors)
         {
             if (vectors == null || vectors.Length == 0)
-                return float3.zero;
+                return Vector3.zero;
     
-            float3 sum = float3.zero;
+            float3 sum = Vector3.zero;
             foreach (var vector in vectors)
                 sum += vector;
     
