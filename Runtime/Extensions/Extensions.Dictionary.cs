@@ -41,11 +41,7 @@ namespace AceLand.Library.Extensions
                 return;
             }
 
-            var value1 = dictionary[key1];
-            var value2 = dictionary[key2];
-
-            dictionary[key1] = value2;
-            dictionary[key2] = value1;
+            (dictionary[key1], dictionary[key2]) = (dictionary[key2], dictionary[key1])
         }
     }
 }
