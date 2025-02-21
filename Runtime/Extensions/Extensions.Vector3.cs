@@ -33,7 +33,7 @@ namespace AceLand.Library.Extensions
             if (vectors == null || vectors.Length == 0)
                 return Vector3.zero;
     
-            float3 sum = Vector3.zero;
+            Vector3 sum = Vector3.zero;
             foreach (var vector in vectors)
                 sum += vector;
     
