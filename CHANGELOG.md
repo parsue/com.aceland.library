@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.13] - 2025-02-22
+
+### Modify
+- [Extensions] more functions
+
 ## [1.0.12] - 2025-02-14
 
 ### Modify
