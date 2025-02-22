@@ -7,8 +7,11 @@ namespace AceLand.Library.Extensions
         public static float Brightness(this Color value) =>
             value.r * DesatuationValue.x + value.g * DesatuationValue.y + value.b * DesatuationValue.z;
 
-        public static Color Mono(this Color value) =>
-            new(value.r * DesatuationValue.x, value.g * DesatuationValue.y, value.b * DesatuationValue.z);
+        public static Color Mono(this Color value)
+        {
+            var brightness = value.Brightness();
+            return new Color(brightness, brightness, brightness);
+        }
 
         public static Color R(this Color value, float r) =>
             new(r, value.g, value.b, value.a);
