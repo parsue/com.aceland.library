@@ -13,12 +13,12 @@ namespace AceLand.Library.Extensions
 
         public static int SnapToCeil(this float value, int snapValue)
         {
-            Mathf.CeilToInt(value / snapValue) * snapValue;
+            return Mathf.CeilToInt(value / snapValue) * snapValue;
         }
 
         public static int SnapToFloor(this float value, int snapValue)
         {
-            Mathf.FloorToInt(value / snapValue) * snapValue;
+            return Mathf.FloorToInt(value / snapValue) * snapValue;
         }
         
         public static float Remap(this float value, float from1, float to1, float from2, float to2)

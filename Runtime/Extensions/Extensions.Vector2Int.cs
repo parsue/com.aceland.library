@@ -17,13 +17,13 @@ namespace AceLand.Library.Extensions
             return 0;
         }
 
-        public static Vector2Int Z(this Vector2Int value, int z = 0) =>
+        public static Vector3Int Z(this Vector2Int value, int z = 0) =>
             new Vector3Int(value.x, value.y, z);
 
         public static Vector2Int YX(this Vector2Int value) =>
             new(value.y, value.x);
 
-        public static Vector2Int YXZ(this Vector2Int value, int z = 0) =>
+        public static Vector3Int YXZ(this Vector2Int value, int z = 0) =>
             new Vector3Int(value.y, value.x, z);
         
         public static Vector2Int X(this Vector2Int value, int x) =>
