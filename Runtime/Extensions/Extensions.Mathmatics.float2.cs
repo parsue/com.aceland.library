@@ -9,6 +9,30 @@ namespace AceLand.Library.Extensions
         
         public static float2 Multiply(this float2 value, double scalar) =>
             new((float)(value.x * scalar), (float)(value.y * scalar));
+
+        public static float2 Average(float2[] vectors)
+        {
+            if (vectors == null || vectors.Length == 0)
+                return float2.zero;
+    
+            float2 sum = float2.zero;
+            foreach (var vector in vectors)
+                sum += vector;
+    
+            return sum / vectors.Length;
+        }
+
+        public static float3 Z(this float2 value, float z = 0) =>
+            new float3(value.x, value.y, z);
+
+        public static float4 ZW(this float2 value, float z = 0, float w = 0) =>
+            new float4(value.x, value.y, z, w);
+
+        public static float3 YXZ(this float2 value, float z = 0) =>
+            new float3(value.y, value.x, z);
+
+        public static float4 YXZW(this float2 value, float z = 0, float w = 0) =>
+            new float4(value.y, value.x, z, w);
         
         public static float2 X(this float2 value, float x) =>
             new(x, value.y);

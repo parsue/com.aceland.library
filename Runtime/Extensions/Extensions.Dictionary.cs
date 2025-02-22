@@ -41,7 +41,7 @@ namespace AceLand.Library.Extensions
                 return;
             }
 
-            (dictionary[key1], dictionary[key2]) = (dictionary[key2], dictionary[key1])
+            (dictionary[key1], dictionary[key2]) = (dictionary[key2], dictionary[key1]);
         }
     }
 }

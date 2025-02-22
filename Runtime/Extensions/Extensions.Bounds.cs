@@ -1,12 +1,9 @@
 using UnityEngine;
-using Random = System.Random;
 
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
-        private static readonly Random Rnd = new();
-
         public static Vector3 RandomPoint(this Bounds bounds)
         {
             Vector3 point = new(bounds.min.x - 10, bounds.min.y - 10, bounds.min.z -10);
