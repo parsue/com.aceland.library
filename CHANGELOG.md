@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.14] - 2025-02-23
+
+### Added
+- [Serialization Surrogate] Vector4 Serialization Surrogate
+
 ## [1.0.13] - 2025-02-22
 
 ### Modify
