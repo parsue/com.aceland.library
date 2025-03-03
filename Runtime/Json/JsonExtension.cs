@@ -14,6 +14,11 @@ namespace AceLand.Library.Json
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             Converters = new List<JsonConverter>()
+            {
+                new ColorConverter(), new Vector2Converter(), new Vector3Converter(),  new Vector4Converter(),
+                new Vector2IntConverter(), new Vector3IntConverter(), new QuaternionConverter(),
+                new BoundsConverter(), new Matrix4x4Converter()
+            }
         };
         
         private static readonly JsonSerializerSettings JSON_SERIALIZER_SETTINGS_WITH_TYPE = new()
@@ -21,6 +26,11 @@ namespace AceLand.Library.Json
             TypeNameHandling = TypeNameHandling.Auto,
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             Converters = new List<JsonConverter>()
+            {
+                new ColorConverter(), new Vector2Converter(), new Vector3Converter(),  new Vector4Converter(),
+                new Vector2IntConverter(), new Vector3IntConverter(), new QuaternionConverter(),
+                new BoundsConverter(), new Matrix4x4Converter()
+            }
         };
 
         public static string ToJson<T>(this T data, bool withTypeName = false)
