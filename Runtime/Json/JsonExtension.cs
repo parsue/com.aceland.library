@@ -15,9 +15,12 @@ namespace AceLand.Library.Json
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             Converters = new List<JsonConverter>()
             {
-                new ColorConverter(), new Vector2Converter(), new Vector3Converter(),  new Vector4Converter(),
+                new ColorConverter(), new GradientConverter(), new AnimationCurveConverter(),
+                new Vector2Converter(), new Vector3Converter(), new Vector4Converter(),
                 new Vector2IntConverter(), new Vector3IntConverter(), new QuaternionConverter(),
-                new BoundsConverter(), new Matrix4x4Converter()
+                new BoundsConverter(), new BoundsIntConverter(), new Matrix4x4Converter(),
+                new Hash128Converter(), new LayerMaskConverter(),
+                new RectIntConverter(), new RectConverter()
             }
         };
         
@@ -27,9 +30,12 @@ namespace AceLand.Library.Json
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             Converters = new List<JsonConverter>()
             {
-                new ColorConverter(), new Vector2Converter(), new Vector3Converter(),  new Vector4Converter(),
+                new ColorConverter(), new GradientConverter(), new AnimationCurveConverter(),
+                new Vector2Converter(), new Vector3Converter(), new Vector4Converter(),
                 new Vector2IntConverter(), new Vector3IntConverter(), new QuaternionConverter(),
-                new BoundsConverter(), new Matrix4x4Converter()
+                new BoundsConverter(), new BoundsIntConverter(), new Matrix4x4Converter(),
+                new Hash128Converter(), new LayerMaskConverter(),
+                new RectIntConverter(), new RectConverter()
             }
         };
 
