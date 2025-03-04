@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.17] - 2025-03-04
+### Modified
+- [Json] amended namespace of JsonConverter
+
 ## [1.0.16] - 2025-03-04
 ### Added
 - [Serialization Surrogate] more Unity data types

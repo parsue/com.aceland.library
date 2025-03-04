@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using UnityEngine;
 
-namespace AceLand.Library.Json
+namespace AceLand.Library.Json.Converters
 {
     public class Vector3IntConverter : JsonConverter<Vector3Int>
     {
