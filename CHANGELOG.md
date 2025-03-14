@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.18] - 2025-03-14
+### Modified
+- [Extension.int] remove clamp function from Remap
+
 ## [1.0.17] - 2025-03-04
 ### Modified
 - [Json] amended namespace of JsonConverter
