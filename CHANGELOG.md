@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [1.0.19] - 2025-04-02
+## [1.0.20] - 2025-04-02
 ### Added
 - [Attribute] ReadOnlyField - showing the field as non-editable in Inspector window
 
