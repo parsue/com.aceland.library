@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.19] - 2025-04-02
+### Added
+- [Attribute] ReadOnlyField - showing the field as non-editable in Inspector window
+
 ## [1.0.18] - 2025-03-14
 ### Modified
 - [Extension.int] remove clamp function from Remap
