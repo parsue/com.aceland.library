@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using ZLinq;
 
 namespace AceLand.Library.Attribute
 {
@@ -97,8 +97,9 @@ namespace AceLand.Library.Attribute
             if (enumValues.Length == 0) return;
 
             Type type = null;
-            
-            foreach (var t in enumValues)
+
+            var values = enumValues.AsValueEnumerable();
+            foreach (var t in values)
             {
                 var valueType = t.GetType();
                 if (type == null) type = valueType;
@@ -111,23 +112,23 @@ namespace AceLand.Library.Attribute
             EnumFieldName = enumVariableName;
             IsFlag = IsDefined(type, typeof(FlagsAttribute));
 
-            var allValues = Enum.GetValues(type);
+            var allValues = Enum.GetValues(type).AsValueEnumerable();
             var enums = new List<int>();
             if (!invert)
             {
-                foreach (var e in enumValues)
+                foreach (var e in values)
                     enums.Add(Array.IndexOf(Enum.GetValues(e.GetType()), e));
             }
             else
             {
                 foreach (var e in allValues)
                 {
-                    if (enumValues.Contains(e)) continue;
+                    if (values.Contains(e)) continue;
                     enums.Add(Array.IndexOf(Enum.GetValues(e.GetType()), e));
                 }
             }
 
-            EnumIndex = enums.ToArray();
+            EnumIndex = enums.AsValueEnumerable().ToArray();
         }
     }
 }

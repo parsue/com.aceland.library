@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using UnityEngine;
-using Object = System.Object;
 
 namespace AceLand.Library.SerializationSurrogate
 {

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using AceLand.Library.SerializationSurrogate;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ZLinq;
 
 namespace AceLand.Library.Utils
 {
@@ -15,12 +13,9 @@ namespace AceLand.Library.Utils
         
         private static bool IsPointerOverUIElement(IEnumerable<RaycastResult> eventSystemRaycastResults)
         {
-            foreach (var curRaycastResult in eventSystemRaycastResults)
-            {
-                if (curRaycastResult.gameObject.layer != LayerMask.NameToLayer("UI")) continue;
-                return true;
-            }
-            return false;
+            return eventSystemRaycastResults
+                .AsValueEnumerable()
+                .Any(curRaycastResult => curRaycastResult.gameObject.layer == LayerMask.NameToLayer("UI"));
         }
 
         private static IEnumerable<RaycastResult> GetEventSystemRaycastResults(Vector2 screenPosition, int displayIndex = 0)

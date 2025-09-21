@@ -17,7 +17,7 @@ namespace AceLand.Library.Json.Converters
 
         public override Gradient ReadJson(JsonReader reader, System.Type objectType, Gradient existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            Gradient gradient = new Gradient();
+            var gradient = new Gradient();
             GradientColorKey[] colorKeys = null;
             GradientAlphaKey[] alphaKeys = null;
 

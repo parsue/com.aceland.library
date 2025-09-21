@@ -21,8 +21,8 @@ namespace AceLand.Library.Json.Converters
         public override AnimationCurve ReadJson(JsonReader reader, Type objectType, AnimationCurve existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             Keyframe[] keys = null;
-            WrapMode preWrapMode = WrapMode.Default;
-            WrapMode postWrapMode = WrapMode.Default;
+            var preWrapMode = WrapMode.Default;
+            var postWrapMode = WrapMode.Default;
 
             while (reader.Read())
             {
