@@ -1,9 +1,11 @@
 using System;
+using Newtonsoft.Json;
 
 namespace AceLand.Library.Disposable
 {
     public abstract class DisposableObject : IDisposable
     {
+        [JsonIgnore]
         public bool Disposed { get; private set; }
 
         public void Dispose()
