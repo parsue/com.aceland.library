@@ -17,8 +17,8 @@ namespace AceLand.Library.Json.Converters
 
         public override BoundsInt ReadJson(JsonReader reader, System.Type objectType, BoundsInt existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            Vector3Int position = Vector3Int.zero;
-            Vector3Int size = Vector3Int.zero;
+            var position = Vector3Int.zero;
+            var size = Vector3Int.zero;
 
             while (reader.Read())
             {
