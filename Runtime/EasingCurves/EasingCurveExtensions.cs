@@ -1,6 +1,8 @@
 using UnityEngine;
 #if DOTWEEN
+using System;
 using DG.Tweening;
+using ZLinq;
 #endif
 
 namespace AceLand.Library.EasingCurves
