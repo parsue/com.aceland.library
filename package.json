@@ -1,6 +1,6 @@
 {
   "name": "com.aceland.library",
-  "version": "1.0.20",
+  "version": "2.0.0",
   "displayName": "AceLand Library",
   "description": "AceLand Library is utilities, editor extension, unity low-level tools, c# and unity implements.\n\nPlease visit our [Git Book](https://aceland-workshop.gitbook.io/aceland-unity-packages).",
   "unity": "2022.3",
@@ -12,7 +12,7 @@
   "author": {
     "name": "Parsue - AceLand Workshop",
     "email": "parsue@gmail.com",
-    "url": "http://www.parsue.io/"
+    "url": "https://www.parsue.io/"
   },
   "keywords": [
     "aceland",
@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "com.unity.mathematics": "1.3.2",
+    "com.github-glitchenzo.nugetforunity": "4.5.0",
 	"com.unity.nuget.newtonsoft-json": "3.2.1"
   },
   "publishConfig": {
