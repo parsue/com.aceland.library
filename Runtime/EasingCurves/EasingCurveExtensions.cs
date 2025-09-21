@@ -1,4 +1,7 @@
 using UnityEngine;
+#if DOTWEEN
+using DG.Tweening;
+#endif
 
 namespace AceLand.Library.EasingCurves
 {
