@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using AceLand.Library.Attribute;
 using UnityEngine;
+using ZLinq;
 
 namespace AceLand.Library.Mono
 {
@@ -48,7 +48,10 @@ namespace AceLand.Library.Mono
         {
             _existingSingletons.Clear();
 
-            foreach (var singleton in FindObjectsByType(typeof(Singleton), FindObjectsSortMode.None).Cast<Singleton>())
+            var singletons = FindObjectsByType(typeof(Singleton), FindObjectsSortMode.None)
+                .AsValueEnumerable()
+                .Cast<Singleton>();
+            foreach (var singleton in singletons)
                 _existingSingletons.Add(singleton.gameObject.name);
         }
 
