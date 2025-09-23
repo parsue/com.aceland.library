@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace AceLand.Library.Json.Converters
 {
-    public class Matrix4X4Converter : JsonConverter<Matrix4x4>
+    public class NativeFloat4X4Converter : JsonConverter<float4x4>
     {
-        public override void WriteJson(JsonWriter writer, Matrix4x4 value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, float4x4 value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
             for (var i = 0; i < 16; i++)
@@ -15,9 +15,9 @@ namespace AceLand.Library.Json.Converters
             writer.WriteEndArray();
         }
 
-        public override Matrix4x4 ReadJson(JsonReader reader, System.Type objectType, Matrix4x4 existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override float4x4 ReadJson(JsonReader reader, System.Type objectType, float4x4 existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            var matrix = new Matrix4x4();
+            var matrix = new float4x4();
             var index = 0;
 
             while (reader.Read())
