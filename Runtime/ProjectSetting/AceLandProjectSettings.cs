@@ -16,9 +16,13 @@ namespace AceLand.Library.ProjectSetting
     public class AceLandProjectSettings : ProjectSettings<AceLandProjectSettings>
     {
         [Header("System Folders")]
-        [SerializeField] private SystemRoot systemRoot = SystemRoot.LocalAppData;
+        [SerializeField] private SystemRoot systemRoot = SystemRoot.PersistentData;
         [ConditionalShow("systemRoot", SystemRoot.Custom)]
-        [SerializeField] private string customerFolder = "c:";
+        [SerializeField] private string customerSystemFolder = "c:";
+        [SerializeField] private SystemRoot tempRoot = SystemRoot.PersistentData;
+        [ConditionalShow("tempRoot", SystemRoot.Custom)]
+        [SerializeField] private string customerTempFolder = "c:";
+        
         [SerializeField, ReadOnlyField] private string systemRootPath;
         [SerializeField, ReadOnlyField] private string tempRootPath;
         
@@ -27,21 +31,33 @@ namespace AceLand.Library.ProjectSetting
 
         public void OnValidate()
         {
-            while (customerFolder.EndsWith('\\') || customerFolder.EndsWith('/'))
-                customerFolder = customerFolder[..^1];
+            while (customerSystemFolder.EndsWith('\\') || customerSystemFolder.EndsWith('/'))
+                customerSystemFolder = customerSystemFolder[..^1];
+            while (customerTempFolder.EndsWith('\\') || customerTempFolder.EndsWith('/'))
+                customerTempFolder = customerTempFolder[..^1];
             
-            var root = systemRoot switch
+            var sRoot = GetPath(systemRoot);
+            var tRoot = GetPath(tempRoot);
+
+            systemRootPath = systemRoot is SystemRoot.PersistentData
+                ? tRoot
+                : Path.Combine(sRoot, Application.companyName, Application.productName);
+            tempRootPath = tempRoot is SystemRoot.PersistentData
+                ? Path.Combine(tRoot, "temp")
+                : Path.Combine(tRoot, Application.companyName, Application.productName, "temp");
+        }
+
+        private string GetPath(SystemRoot root)
+        {
+            var path = root switch
             {
                 SystemRoot.PersistentData => Application.persistentDataPath,
                 SystemRoot.LocalAppData => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 SystemRoot.RoamingAppData => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                SystemRoot.Custom => customerFolder + "\\",
+                SystemRoot.Custom => customerSystemFolder + "\\",
                 _ => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
             };
-            root = root.Replace('/', '\\');
-
-            systemRootPath = Path.Combine(root, Application.companyName, Application.productName);
-            tempRootPath = Path.Combine(systemRootPath, "temp");
+            return path.Replace('/', '\\');
         }
     }
 }
