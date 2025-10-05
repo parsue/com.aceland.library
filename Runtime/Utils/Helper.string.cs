@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
         private const string FULL_CHARACTERS = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\;',./~!@#$%^&*()_+{}|:""<>?";
         private const string CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -11,7 +11,7 @@ namespace AceLand.Library.Utils
         private const string DIGITS = "0123456789";
         private const char SLASH = '\\';
 
-        public static string GetRandomString(int length, CharacterType type = CharacterType.Characters)
+        public string GetRandomString(int length, CharacterType type = CharacterType.Characters)
         {
             var rnd = new Random();
             Span<char> newChars = stackalloc char[length];
@@ -29,7 +29,7 @@ namespace AceLand.Library.Utils
             return new string(newChars);
         }
 
-        public static string Base64Encode(string plainText, Encoding encoding)
+        public string Base64Encode(string plainText, Encoding encoding)
         {
             ReadOnlySpan<byte> plainTextBytes = encoding.GetBytes(plainText);
             return Convert.ToBase64String(plainTextBytes)
@@ -38,7 +38,7 @@ namespace AceLand.Library.Utils
                 .Replace("=", string.Empty);
         }
 
-        public static string Base64Decode(string base64EncodedData, Encoding encoding)
+        public string Base64Decode(string base64EncodedData, Encoding encoding)
         {
             ReadOnlySpan<byte> base64EncodedBytes = Convert.FromBase64String(base64EncodedData
                 .Replace("-", "/")
@@ -46,7 +46,7 @@ namespace AceLand.Library.Utils
             return encoding.GetString(base64EncodedBytes);
         }
 
-        public static void SplitPathAndFilename(string fullPath, out string path, out string filename)
+        public void SplitPathAndFilename(string fullPath, out string path, out string filename)
         {
             filename = fullPath.Split(SLASH)[^1];
             path = fullPath.Replace(filename, "");

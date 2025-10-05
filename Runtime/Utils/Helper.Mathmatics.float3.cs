@@ -2,18 +2,18 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
-        public static bool AllClose(float3 a, float3 b, float epsilon) =>
+        public bool AllClose(float3 a, float3 b, float epsilon) =>
             math.abs(a.x - b.x) < epsilon &&
             math.abs(a.y - b.y) < epsilon &&
             math.abs(a.z - b.z) < epsilon;
         
-        public static float3 Remap(float3 value, float3 from1, float3 to1, float3 from2, float3 to2)
+        public float3 Remap(float3 value, float3 from1, float3 to1, float3 from2, float3 to2)
         {
-            var normalizedValueX = Helper.InverseLerp(from1.x, to1.x, value.x);
-            var normalizedValueY = Helper.InverseLerp(from1.y, to1.y, value.y);
-            var normalizedValueZ = Helper.InverseLerp(from1.z, to1.z, value.z);
+            var normalizedValueX = ALib.Helper.InverseLerp(from1.x, to1.x, value.x);
+            var normalizedValueY = ALib.Helper.InverseLerp(from1.y, to1.y, value.y);
+            var normalizedValueZ = ALib.Helper.InverseLerp(from1.z, to1.z, value.z);
 
             var remappedValueX = math.lerp(from2.x, to2.x, normalizedValueX);
             var remappedValueY = math.lerp(from2.y, to2.y, normalizedValueY);
@@ -22,7 +22,7 @@ namespace AceLand.Library.Utils
             return new float3(remappedValueX, remappedValueY, remappedValueZ);
         }
 
-        public static float3 MoveTowards(float3 current, float3 target, float maxDistanceDelta)
+        public float3 MoveTowards(float3 current, float3 target, float maxDistanceDelta)
         {
             var direction = target - current;
             var lenSq = math.lengthsq(direction);
@@ -35,7 +35,7 @@ namespace AceLand.Library.Utils
             return current + clampedDirection;
         }
 
-        public static float3 ClampLength(float3 value, float maxLength)
+        public float3 ClampLength(float3 value, float maxLength)
         {
             var sqLen = math.lengthsq(value);
             if (sqLen <= maxLength * maxLength) return value;
@@ -44,7 +44,7 @@ namespace AceLand.Library.Utils
             return norValue * maxLength;
         }
 
-        public static float3 SmoothDamp(float3 current, float3 target, ref float3 currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
+        public float3 SmoothDamp(float3 current, float3 target, ref float3 currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
         {
             smoothTime = math.max(0.0001f, smoothTime);
             var frequency = 2f / smoothTime;

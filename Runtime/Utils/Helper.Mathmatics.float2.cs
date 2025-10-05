@@ -2,15 +2,15 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
-        public static bool AllClose(float2 a, float2 b, float epsilon) => 
+        public bool AllClose(float2 a, float2 b, float epsilon) => 
             math.abs(a.x - b.x) < epsilon && math.abs(a.y - b.y) < epsilon;
         
-        public static float2 Remap(float2 value, float2 from1, float2 to1, float2 from2, float2 to2)
+        public float2 Remap(float2 value, float2 from1, float2 to1, float2 from2, float2 to2)
         {
-            var normalizedValueX = Helper.InverseLerp(from1.x, to1.x, value.x);
-            var normalizedValueY = Helper.InverseLerp(from1.y, to1.y, value.y);
+            var normalizedValueX = ALib.Helper.InverseLerp(from1.x, to1.x, value.x);
+            var normalizedValueY = ALib.Helper.InverseLerp(from1.y, to1.y, value.y);
 
             var remappedValueX = math.lerp(from2.x, to2.x, normalizedValueX);
             var remappedValueY = math.lerp(from2.y, to2.y, normalizedValueY);
@@ -18,7 +18,7 @@ namespace AceLand.Library.Utils
             return new float2(remappedValueX, remappedValueY);
         }
 
-        public static float2 MoveTowards(float2 current, float2 target, float maxDistanceDelta)
+        public float2 MoveTowards(float2 current, float2 target, float maxDistanceDelta)
         {
             var direction = target - current;
             var lenSq = math.lengthsq(direction);
@@ -31,7 +31,7 @@ namespace AceLand.Library.Utils
             return current + clampedDirection;
         }
 
-        public static float2 ClampLength(float2 value, float maxLength)
+        public float2 ClampLength(float2 value, float maxLength)
         {
             var sqLen = math.lengthsq(value);
             if (sqLen <= maxLength * maxLength) return value;
@@ -40,7 +40,7 @@ namespace AceLand.Library.Utils
             return norValue * maxLength;
         }
 
-        public static float2 SmoothDamp(float2 current, float2 target, ref float2 currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
+        public float2 SmoothDamp(float2 current, float2 target, ref float2 currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
         {
             smoothTime = math.max(0.0001f, smoothTime);
             var frequency = 2f / smoothTime;

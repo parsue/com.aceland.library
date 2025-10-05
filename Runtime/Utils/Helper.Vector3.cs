@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
-        public static Vector3 GetRotateAxis(TransformDirection transformDirection) =>
+        public Vector3 GetRotateAxis(TransformDirection transformDirection) =>
             transformDirection switch
             {
                 TransformDirection.Left => Vector3.left,
@@ -17,7 +17,7 @@ namespace AceLand.Library.Utils
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-        public static Vector3 SmoothDirection(Vector3 normal, Vector3 inDirection)
+        public Vector3 SmoothDirection(Vector3 normal, Vector3 inDirection)
         {
             var v3 = Vector3.Cross(normal, inDirection);
             v3 = Vector3.Cross(v3, normal);

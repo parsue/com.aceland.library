@@ -1,12 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using AceLand.Library.Utils;
+using Newtonsoft.Json;
 
 namespace AceLand.Library
 {
     public static partial class ALib
     {
+
+        public static Helper Helper
+        {
+            get
+            {
+                _helper ??= new Helper();
+                return _helper;
+            }
+        }
+        private static Helper _helper;
+        
         public static string SystemRootPath => ProjectSettings.SystemRootPath;
         public static string TempRootPath => ProjectSettings.TempRootPath;
-
 
         public static JsonSerializerSettings JsonSerializerSettings { get; } = new()
         {

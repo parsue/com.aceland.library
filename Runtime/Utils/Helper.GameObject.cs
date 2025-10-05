@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {      
-        public static GameObject CreateEmptyInHierarchy(string name, Transform parent = null) =>
+        public GameObject CreateEmptyInHierarchy(string name, Transform parent = null) =>
             new()
             {
                 name = name,

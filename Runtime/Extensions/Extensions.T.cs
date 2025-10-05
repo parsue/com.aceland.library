@@ -15,7 +15,7 @@ namespace AceLand.Library.Extensions
                 throw new ArgumentNullException(nameof(obj));
 
             using var memoryStream = new MemoryStream();
-            var formatter = Helper.GetBinaryFormatter();
+            var formatter = ALib.Helper.GetBinaryFormatter();
             formatter.Serialize(memoryStream, obj);
             memoryStream.Seek(0, SeekOrigin.Begin);
             return (T)formatter.Deserialize(memoryStream);

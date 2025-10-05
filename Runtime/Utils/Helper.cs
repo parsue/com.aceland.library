@@ -5,9 +5,11 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public sealed partial class Helper
     {
-        public static IFormatter GetBinaryFormatter()
+        internal Helper() { }
+        
+        public IFormatter GetBinaryFormatter()
         {
             const StreamingContextStates states = StreamingContextStates.All;
             

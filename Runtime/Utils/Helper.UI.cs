@@ -5,19 +5,19 @@ using ZLinq;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
-        public static bool IsOverUIElement(Vector2 screenPosition, int displayIndex = 0) =>
+        public bool IsOverUIElement(Vector2 screenPosition, int displayIndex = 0) =>
             IsPointerOverUIElement(GetEventSystemRaycastResults(screenPosition, displayIndex));
         
-        private static bool IsPointerOverUIElement(IEnumerable<RaycastResult> eventSystemRaycastResults)
+        private bool IsPointerOverUIElement(IEnumerable<RaycastResult> eventSystemRaycastResults)
         {
             return eventSystemRaycastResults
                 .AsValueEnumerable()
                 .Any(curRaycastResult => curRaycastResult.gameObject.layer == LayerMask.NameToLayer("UI"));
         }
 
-        private static IEnumerable<RaycastResult> GetEventSystemRaycastResults(Vector2 screenPosition, int displayIndex = 0)
+        private IEnumerable<RaycastResult> GetEventSystemRaycastResults(Vector2 screenPosition, int displayIndex = 0)
         {
             PointerEventData eventData = new(EventSystem.current)
             {
