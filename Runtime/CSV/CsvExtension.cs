@@ -54,7 +54,7 @@ namespace AceLand.Library.CSV
             foreach (var line in lines)
             {
                 if (string.IsNullOrEmpty(line.Trim())) continue;
-                var fields = Helper.ReadCsvLine(line);
+                var fields = ALib.Helper.ReadCsvLine(line);
                 yield return fields;
             }
         }
@@ -69,7 +69,7 @@ namespace AceLand.Library.CSV
             foreach (var line in lines)
             {
                 if (string.IsNullOrEmpty(line.Trim())) continue;
-                var fields = Helper.ReadCsvLine(line);
+                var fields = ALib.Helper.ReadCsvLine(line);
                 yield return fields;
             }
         }

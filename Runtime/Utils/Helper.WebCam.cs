@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {        
-        public static int WebCamCount => WebCamTexture.devices.Length;
-        public static bool HasWebCam => WebCamCount > 0;
+        public int WebCamCount => WebCamTexture.devices.Length;
+        public bool HasWebCam => WebCamCount > 0;
         
-        public static bool TryGetWebCam(int camId, int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
+        public bool TryGetWebCam(int camId, int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
         {
             if (!HasWebCam)
             {
@@ -21,7 +21,7 @@ namespace AceLand.Library.Utils
             return true;
         }
 
-        public static bool TryGetFrontCam(int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
+        public bool TryGetFrontCam(int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
         {
 #if UNITY_ANDROID
             return GetFrontCam(width, height, fps, out webCamDevice, out webCamTexture);
@@ -32,7 +32,7 @@ namespace AceLand.Library.Utils
 #endif
         }
 
-        private static bool GetFrontCam(int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
+        private bool GetFrontCam(int width, int height, int fps, out WebCamDevice webCamDevice, out WebCamTexture webCamTexture)
         {
             var devices = WebCamTexture.devices;
 

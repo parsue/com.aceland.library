@@ -2,9 +2,9 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public static partial class Helper
+    public partial class Helper
     {
-        public static float SmoothDamp(float current, float target, ref float currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
+        public float SmoothDamp(float current, float target, ref float currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
         {
             smoothTime = math.max(0.0001f, smoothTime);
             var frequency = 2f / smoothTime;
@@ -32,7 +32,7 @@ namespace AceLand.Library.Utils
             return smoothedTarget;
         }
         
-        public static float InverseLerp(float a, float b, float value) =>
+        public float InverseLerp(float a, float b, float value) =>
             math.abs(a - b) > float.Epsilon ? math.clamp((value - a) / (b - a), 0, 1) : 0.0f;
     }
 }
