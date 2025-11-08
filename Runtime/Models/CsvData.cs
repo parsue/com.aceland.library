@@ -14,7 +14,8 @@ namespace AceLand.Library.Models
         {
             HasHeader = hasHeader;
             Header = hasHeader ? lines[0] : Array.Empty<string>();
-            _lines = lines.GetRange(hasHeader ? 1 : 0, lines.Count - 1)
+            var lineCount = hasHeader ? lines.Count - 1 : lines.Count;
+            _lines = lines.GetRange(hasHeader ? 1 : 0, lineCount)
                 .AsValueEnumerable()
                 .ToArray();
             ColumnCount = columnCount;
