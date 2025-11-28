@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace AceLand.Library.KalmanFilters.Core
 {
-	public class KalmanFilterVector2 : KalmanFilterBase<Vector2>
+	internal class KalmanFilterVector2 : KalmanFilterBase<Vector2>
 	{
-		internal KalmanFilterVector2(float q, float r, float p) : base(q, r, p) { }
+		internal static KalmanFilterVector2 Build(float q, float r, float p) => new(q, r, p);
+	    
+		private KalmanFilterVector2(float q, float r, float p) : base(q, r, p) { }
 
 		public override Vector2 Update(Vector2 measurement, float? newQ = null, float? newR = null)
 		{

@@ -2,21 +2,21 @@ using System.Collections.Generic;
 
 namespace AceLand.Library.KalmanFilters.Core
 {
-    public abstract class KalmanFilterBase<T> : IKalmanFilter<T>
+    internal abstract class KalmanFilterBase<T> : IKalmanFilter<T>
         where T : unmanaged
     {
-        private protected float Q;  // the covariance of the process noise, default 0.000001
-        private protected float R;  // the covariance of the observation noise, default 0.001
-        private protected float P;  // last prediction with R
-        private protected float K;  // last prediction
-        private protected T X;      // last result
-
         internal KalmanFilterBase(float q, float r, float p)
         {
             Q = q;
             R = r;
             P = p;
         }
+
+        private protected float Q;  // the covariance of the process noise, default 0.000001
+        private protected float R;  // the covariance of the observation noise, default 0.001
+        private protected float P;  // last prediction with R
+        private protected float K;  // last prediction
+        private protected T X;      // last result
 
         public (T x, float p, float k) GetCurrentValues()
         {

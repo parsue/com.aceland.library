@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 namespace AceLand.Library.KalmanFilters.Core
 {
-    public class KalmanFilterFloat : KalmanFilterBase<float>
+	internal class KalmanFilterFloat : KalmanFilterBase<float>
     {
-	    internal KalmanFilterFloat(float q, float r, float p) : base(q, r, p) { }
+	    internal static KalmanFilterFloat Build(float q, float r, float p) => new(q, r, p);
+	    
+	    private KalmanFilterFloat(float q, float r, float p) : base(q, r, p) { }
 	    
 		public override float Update(float measurement, float? newQ = null, float? newR = null) {
 

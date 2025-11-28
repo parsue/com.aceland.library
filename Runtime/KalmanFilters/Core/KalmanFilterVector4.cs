@@ -3,9 +3,11 @@ using System.Numerics;
 
 namespace AceLand.Library.KalmanFilters.Core
 {
-	public class KalmanFilterVector4 : KalmanFilterBase<Vector4>
+	internal class KalmanFilterVector4 : KalmanFilterBase<Vector4>
 	{
-		internal KalmanFilterVector4(float q, float r, float p) : base(q, r, p) { }
+		internal static KalmanFilterVector4 Build(float q, float r, float p) => new(q, r, p);
+	    
+		private KalmanFilterVector4(float q, float r, float p) : base(q, r, p) { }
 
 		public override Vector4 Update(Vector4 measurement, float? newQ = null, float? newR = null) {
 
