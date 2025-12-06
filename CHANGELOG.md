@@ -2,7 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+---
+
+## [2.1.1] - 2025-12-06
+### Modified
+- [package.json] add doc links
+
+## [2.0.10] 2025-11-30
+### Removed
+- [Kalman Filter] become independent package.
+
+## [2.0.9] 2025-11-28
+### Modified
+- [Kalman Filter] documents updated
+- [Kalman Filter] set internal to concret class, open only interface
+- [Kalman Filter] internal structure
+
+## [2.0.8] 2025-11-13
+### Added
+- [Metric] strong type for Length and Area for metric units
+- [GeoLocation] string type for Wgs84Location with Latitude and Longitude
+
+## [2.0.7] 2025-11-08
+### Modified
+- [csv] fix csv reader ignore first line when csv contains no header
+
+## [2.0.6] 2025-11-08
+### Modified
+- [Json] fix GradientConverter reference loop handling issue
+- [Json] promised usage for converters, please view document
+
+## [2.0.5] 2025-10-18
+### Removed
+- [Helper] UI functions - implement to Input Package
+
+## [2.0.4] 2025-10-05
+### Added
+- [ALib] API to Utils Object
+- [Project Settings] Unity Application locations
+- [Project Settings] temp locations with own SystemRoot
+### Modified
+- [Utils] switch to internal object, create on first call
+- Platform becomes ALib.Platform
+- Helper becomes ALib.Helper
+- [Json] Extension with data models
+### Removed
+- [Utils] to be internal functions, us ALib to access
+- [Json] Json Async task move to Task Utils
+
+## [2.0.3] - 2025-09-23
+### Added
+- [Json] converters for native types
+- [Models] PathData for safe path data
+- [Models] CsvData for cache of csv contents
+### Modified
+- [CSV] Extension with data models
+
+## [2.0.2] - 2025-09-21
+- [Dependency] request ZLinq installed from NuGet
+- optimize code with ZLinq
+- add AMVR project settings page
+- [Project Settings] add applicatoin root and temp root options
+- [Bootstrapper] auto create application root folder if option enabled
+- [Easing Curve] curves by math calculation
+- [Attribute] fix ReadonlyField incorrect line height of property
+- [DisposableObject] tag properties as Json Ignore
 
 ---
 
