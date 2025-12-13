@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.1.0] - 2025-12-13[.gitignore](.gitignore)
+## [2.1.0] - 2025-12-13
 ### Modified
 - [Editor] handle obsolute function on 6000.3 or newer
 ### Removed
 - all meta files
-ss
+
 ## [2.0.11] - 2025-12-06
 ### Modified
 - [package.json] add doc links[.gitignore](.gitignore)
