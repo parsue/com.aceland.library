@@ -26,8 +26,8 @@ namespace AceLand.Library.ProjectSetting
         [SerializeField, ReadOnlyField] private string systemRootPath;
         [SerializeField, ReadOnlyField] private string tempRootPath;
         
-        public string SystemRootPath => systemRootPath;
-        public string TempRootPath => tempRootPath;
+        public string SystemRootPath => GetSystemRoot();
+        public string TempRootPath => GetTempRoot();
 
 #if UNITY_EDITOR
         
@@ -38,7 +38,19 @@ namespace AceLand.Library.ProjectSetting
         
 #endif
 
-        internal void UpdateSystemRoot()
+        private string GetSystemRoot()
+        {
+            UpdateSystemRoot();
+            return systemRootPath;
+        }
+
+        private string GetTempRoot()
+        {
+            UpdateSystemRoot();
+            return tempRootPath;
+        }
+
+        private void UpdateSystemRoot()
         {
             while (customerSystemFolder.EndsWith('\\') || customerSystemFolder.EndsWith('/'))
                 customerSystemFolder = customerSystemFolder[..^1];
@@ -54,7 +66,7 @@ namespace AceLand.Library.ProjectSetting
             tempRootPath = tempRoot is SystemRoot.PersistentData
                 ? Path.Combine(tRoot, "temp")
                 : Path.Combine(tRoot, Application.companyName, Application.productName, "temp");
-        } 
+        }
 
         private string GetPath(SystemRoot root)
         {
