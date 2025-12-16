@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.1.2] - 2025-12-16
+### Fixed
+- [ALib] Update SystemRoot on Initialization.
+
 ## [2.1.1] - 2025-12-13
 ### Added
 - all meta files
