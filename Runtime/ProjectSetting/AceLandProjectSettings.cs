@@ -29,7 +29,16 @@ namespace AceLand.Library.ProjectSetting
         public string SystemRootPath => systemRootPath;
         public string TempRootPath => tempRootPath;
 
+#if UNITY_EDITOR
+        
         public void OnValidate()
+        {
+            UpdateSystemRoot();
+        }
+        
+#endif
+
+        internal void UpdateSystemRoot()
         {
             while (customerSystemFolder.EndsWith('\\') || customerSystemFolder.EndsWith('/'))
                 customerSystemFolder = customerSystemFolder[..^1];
@@ -45,7 +54,7 @@ namespace AceLand.Library.ProjectSetting
             tempRootPath = tempRoot is SystemRoot.PersistentData
                 ? Path.Combine(tRoot, "temp")
                 : Path.Combine(tRoot, Application.companyName, Application.productName, "temp");
-        }
+        } 
 
         private string GetPath(SystemRoot root)
         {
