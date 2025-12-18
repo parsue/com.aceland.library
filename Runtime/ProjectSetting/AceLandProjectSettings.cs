@@ -26,8 +26,8 @@ namespace AceLand.Library.ProjectSetting
         [SerializeField, ReadOnlyField] private string systemRootPath;
         [SerializeField, ReadOnlyField] private string tempRootPath;
         
-        public string SystemRootPath => GetSystemRoot();
-        public string TempRootPath => GetTempRoot();
+        public string SystemRootPath => systemRootPath;
+        public string TempRootPath => tempRootPath;
 
 #if UNITY_EDITOR
         
@@ -38,16 +38,9 @@ namespace AceLand.Library.ProjectSetting
         
 #endif
 
-        private string GetSystemRoot()
+        internal void SetSystemRoot()
         {
             UpdateSystemRoot();
-            return systemRootPath;
-        }
-
-        private string GetTempRoot()
-        {
-            UpdateSystemRoot();
-            return tempRootPath;
         }
 
         private void UpdateSystemRoot()

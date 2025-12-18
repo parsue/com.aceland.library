@@ -22,6 +22,7 @@ namespace AceLand.Library
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void Initialize()
         {
+            ProjectSettings.SetSystemRoot();
             Directory.CreateDirectory(SystemRootPath);
             Directory.CreateDirectory(TempRootPath);
         }
