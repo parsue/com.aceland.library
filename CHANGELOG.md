@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.1.4] - 2025-12-18
+### Fixed
+- [ALib] Cache SystemRoot
+
 ## [2.1.3] - 2025-12-16
 ### Fixed
-- [ALib] Update SystemRoot on Initialization.
+- [ALib] Update SystemRoot on Initialization
 
 ## [2.1.1] - 2025-12-13
 ### Added
