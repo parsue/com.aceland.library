@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.2.0] - 2025-12-20
+### Added
+- [Dependency] AceLand.ProjectSetting
+### Remove
+- [Data Tools] separate to independent package
+- [Easing Curve] separate to independent package
+- [Metric] separate to independent package
+- [Optional] separate to independent package
+- [ProjectSetting] separate to independent package, including Build Level
+
+---
+
 ## [2.1.4] - 2025-12-18
 ### Fixed
 - [ALib] Cache SystemRoot
