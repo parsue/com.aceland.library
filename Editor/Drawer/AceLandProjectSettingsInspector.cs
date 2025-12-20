@@ -1,11 +1,11 @@
-﻿namespace AceLand.Library.Editor.Drawer
+﻿using AceLand.Library.ProjectSetting;
+using AceLand.ProjectSetting.Editor;
+using UnityEditor;
+
+namespace AceLand.Library.Editor.Drawer
 {
-    public class AceLandProjectSettingsInspector : UnityEditor.Editor
+    [CustomEditor(typeof(AceLandProjectSettings))]
+    public class AceLandProjectSettingsInspector : AceLandSettingsInspector
     {
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorHelper.DrawAllPropertiesAsDisabled(serializedObject);
-        }
     }
 }

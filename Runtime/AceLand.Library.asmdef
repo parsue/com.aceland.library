@@ -2,7 +2,8 @@
     "name": "AceLand.Library",
     "rootNamespace": "AceLand.Library",
     "references": [
-        "GUID:d8b63aba1907145bea998dd612889d6b"
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:03d7f3b5b2cdbe14dad3ef6460233f6b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

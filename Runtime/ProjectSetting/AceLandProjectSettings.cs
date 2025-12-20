@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using AceLand.Library.Attribute;
+using AceLand.ProjectSetting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+
 // ReSharper disable UnusedMember.Local
 
 namespace AceLand.Library.ProjectSetting
