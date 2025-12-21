@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.2.1] - 2025-12-21
+### Remove
+- [Disposal] separate to independent package
+- [Singleton] separate to independent package
+- [Mono] removed due to not useful
+
 ## [2.2.0] - 2025-12-20
 ### Added
 - [Dependency] AceLand.ProjectSetting
