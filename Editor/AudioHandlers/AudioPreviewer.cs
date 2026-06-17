@@ -3,19 +3,26 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace AceLand.Library.Editor.AudioHandlers
 {
     public static class AudioPreviewer
     {
+#if UNITY_6000_4_OR_NEWER
+        private static EntityId? _lastPlayedAudioClipId = null;
+#else
         private static int? _lastPlayedAudioClipId = null;
+#endif
 
         [OnOpenAsset]
+#if UNITY_6000_4_OR_NEWER
+        public static bool OnOpenAsset(EntityId entityId)
+#else
         public static bool OnOpenAsset(int instanceId, int line)
+#endif
         {
-#if UNITY_6000_3_OR_NEWER
-            var obj = EditorUtility.EntityIdToObject(instanceId);
+#if UNITY_6000_4_OR_NEWER
+            var obj = EditorUtility.EntityIdToObject(entityId);
 #else
             var obj = EditorUtility.InstanceIDToObject(instanceId);
 #endif
@@ -23,14 +30,24 @@ namespace AceLand.Library.Editor.AudioHandlers
             if (IsPreviewClipPlaying())
             {
                 StopAllPreviewClips();
+#if UNITY_6000_4_OR_NEWER
+                if (_lastPlayedAudioClipId.HasValue && _lastPlayedAudioClipId.Value != audioClip.GetEntityId())
+#else
                 if (_lastPlayedAudioClipId.HasValue && _lastPlayedAudioClipId.Value != audioClip.GetInstanceID())
+#endif
                     PlayPreviewClip(audioClip);
             }
             else
             {
                 PlayPreviewClip(audioClip);
             }
+            
+#if UNITY_6000_4_OR_NEWER
+            _lastPlayedAudioClipId = audioClip.GetEntityId();
+#else
             _lastPlayedAudioClipId = audioClip.GetInstanceID();
+#endif
+            
             return true;
         }
 
