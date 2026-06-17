@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.2.2] - 2026-06-17
+### Fixed
+- [Audio Previewer] Unity 6.5 InstanceId issue 
+
 ## [2.2.1] - 2025-12-21
-### Remove
+### Removed
 - [Disposal] separate to independent package
 - [Singleton] separate to independent package
 - [Mono] removed due to not useful
@@ -13,7 +17,7 @@ All notable changes to this project will be documented in this file.
 ## [2.2.0] - 2025-12-20
 ### Added
 - [Dependency] AceLand.ProjectSetting
-### Remove
+### Removed
 - [Data Tools] separate to independent package
 - [Easing Curve] separate to independent package
 - [Metric] separate to independent package
