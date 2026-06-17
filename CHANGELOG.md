@@ -11,8 +11,12 @@ All notable changes to this project will be documented in this file.
 ## [2.2.1] - 2025-12-21
 ### Removed
 - [Disposal] separate to independent package
+- [Geo Location] separate to independent package
+- [Model] separate to independent package
 - [Singleton] separate to independent package
 - [Mono] removed due to not useful
+- [Extensions] separate partal contents to independent package
+- [Utils] separate partal contents to independent package
 
 ## [2.2.0] - 2025-12-20
 ### Added
