@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.2.3] - 2026-06-23
+### Added
+- [ALib] system and temp roots are separated by editor and build, defaultly true 
+
 ## [2.2.2] - 2026-06-17
 ### Fixed
 - [Audio Previewer] Unity 6.5 InstanceId issue 
