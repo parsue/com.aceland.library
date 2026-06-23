@@ -16,6 +16,7 @@ namespace AceLand.Library.ProjectSetting
     public class AceLandProjectSettings : ProjectSettings<AceLandProjectSettings>
     {
         [Header("System Folders")]
+        [SerializeField] private bool separateEditorAndBuild = true;
         [SerializeField] private SystemRoot systemRoot = SystemRoot.PersistentData;
         [ConditionalShow("systemRoot", SystemRoot.Custom)]
         [SerializeField] private string customerSystemFolder = "c:";
@@ -53,12 +54,39 @@ namespace AceLand.Library.ProjectSetting
             var sRoot = GetPath(systemRoot);
             var tRoot = GetPath(tempRoot);
 
-            systemRootPath = systemRoot is SystemRoot.PersistentData
-                ? tRoot
-                : Path.Combine(sRoot, Application.companyName, Application.productName);
-            tempRootPath = tempRoot is SystemRoot.PersistentData
-                ? Path.Combine(tRoot, "temp")
-                : Path.Combine(tRoot, Application.companyName, Application.productName, "temp");
+#if UNITY_EDITOR
+            systemRootPath = (systemRoot is SystemRoot.PersistentData, separateEditorAndBuild) switch
+            {
+                (true, false) => tRoot,
+                (true, true) => Path.Combine(tRoot, "Editor"),
+                (false, false) =>
+                    Path.Combine(sRoot, Application.companyName, Application.productName),
+                (false, true) => 
+                    Path.Combine(sRoot, Application.companyName, Application.productName, "Editor"),
+            };
+            
+            tempRootPath = (systemRoot is SystemRoot.PersistentData, separateEditorAndBuild) switch
+            {
+                (true, false) => Path.Combine(tRoot, "temp"),
+                (true, true) => Path.Combine(tRoot, "Editor", "temp"),
+                (false, false) =>
+                    Path.Combine(tRoot, Application.companyName, Application.productName, "temp"),
+                (false, true) => 
+                    Path.Combine(sRoot, Application.companyName, Application.productName, "Editor", "temp"),
+            };
+#else
+            systemRootPath = (systemRoot is SystemRoot.PersistentData) switch
+            {
+                true => tRoot,
+                false => Path.Combine(sRoot, Application.companyName, Application.productName),
+            };
+            
+            tempRootPath = (systemRoot is SystemRoot.PersistentData) switch
+            {
+                true => Path.Combine(tRoot, "temp"),
+                false => Path.Combine(tRoot, Application.companyName, Application.productName, "temp"),
+            };
+#endif
         }
 
         private string GetPath(SystemRoot root)
