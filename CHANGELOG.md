@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+# Road To CLR
+
+## [3.0.0] - 2026-08-17
+### Removed
+- [Helper] GameObject Fns
+
+---
+# Before Unity 7 and CLR
+
 ## [2.2.3] - 2026-06-23
 ### Added
 - [ALib] system and temp roots are separated by editor and build, defaultly true 

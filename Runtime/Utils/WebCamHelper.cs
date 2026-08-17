@@ -2,7 +2,18 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public partial class Helper
+    public interface IWebcamHelper
+    {
+        int WebCamCount { get; }
+        bool HasWebCam { get; }
+        bool TryGetWebCam(int camId, int width, int height, int fps,
+            out WebCamDevice webCamDevice, out WebCamTexture webCamTexture);
+
+        bool TryGetFrontCam(int width, int height, int fps, out WebCamDevice webCamDevice,
+            out WebCamTexture webCamTexture);
+    }
+    
+    public sealed class WebcamHelper : IWebcamHelper
     {        
         public int WebCamCount => WebCamTexture.devices.Length;
         public bool HasWebCam => WebCamCount > 0;

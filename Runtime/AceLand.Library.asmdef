@@ -3,6 +3,8 @@
     "rootNamespace": "AceLand.Library",
     "references": [
         "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:6f935f44cf956b548a225b524caea96c",
+        "GUID:e0e847b4cbd59cd41a590a0a90faea0c",
         "GUID:03d7f3b5b2cdbe14dad3ef6460233f6b"
     ],
     "includePlatforms": [],
@@ -12,6 +14,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.aceland.injection",
+            "expression": "0.0.1",
+            "define": "ACELAND_INJECTION_RUNTIME"
+        }
+    ],
     "noEngineReferences": false
 }

@@ -2,7 +2,7 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public partial class Helper
+    public partial class ALibHelper
     {
         public float SmoothDamp(float current, float target, ref float currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
         {

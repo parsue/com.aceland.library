@@ -2,7 +2,7 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public partial class Helper
+    public partial class ALibHelper
     {
         public bool AllClose(float3 a, float3 b, float epsilon) =>
             math.abs(a.x - b.x) < epsilon &&
@@ -11,9 +11,9 @@ namespace AceLand.Library.Utils
         
         public float3 Remap(float3 value, float3 from1, float3 to1, float3 from2, float3 to2)
         {
-            var normalizedValueX = ALib.Helper.InverseLerp(from1.x, to1.x, value.x);
-            var normalizedValueY = ALib.Helper.InverseLerp(from1.y, to1.y, value.y);
-            var normalizedValueZ = ALib.Helper.InverseLerp(from1.z, to1.z, value.z);
+            var normalizedValueX = InverseLerp(from1.x, to1.x, value.x);
+            var normalizedValueY = InverseLerp(from1.y, to1.y, value.y);
+            var normalizedValueZ = InverseLerp(from1.z, to1.z, value.z);
 
             var remappedValueX = math.lerp(from2.x, to2.x, normalizedValueX);
             var remappedValueY = math.lerp(from2.y, to2.y, normalizedValueY);

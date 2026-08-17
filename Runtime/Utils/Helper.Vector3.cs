@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AceLand.Library.Utils
 {
-    public partial class Helper
+    public partial class ALibHelper
     {
         public Vector3 GetRotateAxis(TransformDirection transformDirection) =>
             transformDirection switch
