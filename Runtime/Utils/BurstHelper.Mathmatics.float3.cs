@@ -2,7 +2,7 @@ using Unity.Mathematics;
 
 namespace AceLand.Library.Utils
 {
-    public partial class ALibHelper
+    public partial class BurstHelper
     {
         public bool AllClose(float3 a, float3 b, float epsilon) =>
             math.abs(a.x - b.x) < epsilon &&

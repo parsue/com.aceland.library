@@ -25,39 +25,34 @@ namespace AceLand.Library.Services
     /// If you want to secure data from reading easily,
     ///     Read and Write your values by this service.
     /// </summary>
-    internal sealed class RegistryService : IRegistryService, IDisposable
+    internal sealed class RegistryService : IRegistryService
     {
-        internal RegistryService(IStringHelper stringHelper)
+        private RegistryService(IStringHelper stringHelper)
         {
-            this.stringHelper = stringHelper;
+            _stringHelper = stringHelper;
         }
 
-        public void Dispose()
-        {
-            // ignore
-        }
-
-        private readonly IStringHelper stringHelper;
+        private readonly IStringHelper _stringHelper;
 
         public string Read(string key, string defaultValue = null)
         {
             if (!CheckKey(key)) return defaultValue ?? string.Empty;
             
-            var enKey = stringHelper.Encrypt(key);
+            var enKey = _stringHelper.Encrypt(key);
             var encrypted = PlayerPrefs.GetString(enKey, defaultValue ?? string.Empty);
             
-            return stringHelper.Decrypt(encrypted) ?? defaultValue;
+            return _stringHelper.Decrypt(encrypted) ?? defaultValue;
         }
 
         public int Read(string key, int defaultValue = 0)
         {
             if (!CheckKey(key)) return defaultValue;
 
-            var enKey = stringHelper.Encrypt(key);
+            var enKey = _stringHelper.Encrypt(key);
             var encrypted = PlayerPrefs.GetString(enKey);
             if (encrypted.IsNullOrEmptyOrWhiteSpace()) return defaultValue;
 
-            var decrypted = stringHelper.Decrypt(encrypted);
+            var decrypted = _stringHelper.Decrypt(encrypted);
 
             return !decrypted.IsNullOrEmptyOrWhiteSpace() && int.TryParse(decrypted, out var result)
                 ? result
@@ -68,11 +63,11 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return defaultValue;
 
-            var enKey = stringHelper.Encrypt(key);
+            var enKey = _stringHelper.Encrypt(key);
             var encrypted = PlayerPrefs.GetString(enKey);
             if (encrypted.IsNullOrEmptyOrWhiteSpace()) return defaultValue;
 
-            var decrypted = stringHelper.Decrypt(encrypted);
+            var decrypted = _stringHelper.Decrypt(encrypted);
 
             return !decrypted.IsNullOrEmptyOrWhiteSpace() && bool.TryParse(decrypted, out var result)
                 ? result
@@ -83,12 +78,12 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return defaultValue ?? Array.Empty<string>();
 
-            var enKey = stringHelper.Encrypt(key);
+            var enKey = _stringHelper.Encrypt(key);
             var encrypted = PlayerPrefs.GetString(enKey);
             if (encrypted.IsNullOrEmptyOrWhiteSpace()) return defaultValue ?? Array.Empty<string>();
 
             var encList = encrypted.Split(',');
-            var decList = encList.Select(v => stringHelper.Encrypt(v))
+            var decList = encList.Select(v => _stringHelper.Encrypt(v))
                 .Where(v => !v.IsNullOrEmptyOrWhiteSpace())
                 .ToArray();
 
@@ -99,8 +94,8 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return;
 
-            var enKey = stringHelper.Encrypt(key);
-            var encrypted = stringHelper.Encrypt(value);
+            var enKey = _stringHelper.Encrypt(key);
+            var encrypted = _stringHelper.Encrypt(value);
             
             PlayerPrefs.SetString(enKey, encrypted);
         }
@@ -109,8 +104,8 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return;
 
-            var enKey = stringHelper.Encrypt(key);
-            var encrypted = stringHelper.Encrypt(value.ToString());
+            var enKey = _stringHelper.Encrypt(key);
+            var encrypted = _stringHelper.Encrypt(value.ToString());
             
             PlayerPrefs.SetString(enKey, encrypted);
         }
@@ -119,8 +114,8 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return;
 
-            var enKey = stringHelper.Encrypt(key);
-            var encrypted = stringHelper.Encrypt(value.ToString());
+            var enKey = _stringHelper.Encrypt(key);
+            var encrypted = _stringHelper.Encrypt(value.ToString());
             
             PlayerPrefs.SetString(enKey, encrypted);
         }
@@ -129,8 +124,8 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return;
 
-            var enKey = stringHelper.Encrypt(key);
-            var list = values.Select(v => stringHelper.Encrypt(v)).ToList();
+            var enKey = _stringHelper.Encrypt(key);
+            var list = values.Select(v => _stringHelper.Encrypt(v)).ToList();
             var encrypted = string.Join(",", list);
             
             PlayerPrefs.SetString(enKey, encrypted);
@@ -140,7 +135,7 @@ namespace AceLand.Library.Services
         {
             if (!CheckKey(key)) return;
             
-            var enKey = stringHelper.Encrypt(key);
+            var enKey = _stringHelper.Encrypt(key);
             if (!PlayerPrefs.HasKey(enKey)) return;
 
             PlayerPrefs.DeleteKey(enKey);

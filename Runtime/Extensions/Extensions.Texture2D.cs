@@ -1,9 +1,28 @@
+#nullable enable
+using System.Threading.Tasks;
+using AceLand.Lifecycle;
 using UnityEngine;
 
 namespace AceLand.Library.Extensions
 {
     public static partial class Extensions
     {
+        public static async Task<Texture2D> CropAndResizeToSquareAsync(this Texture2D originalTexture, int squareSize)
+        {
+            Texture2D? result = null;
+            await LifecycleFrame.RunNextFrame(() => result = CropAndResizeToSquare(originalTexture, squareSize));
+
+            return result!;
+        }
+        
+        public static async Task<Texture2D> ResizeAsync(this Texture2D originalTexture, int targetWidth, int targetHeight)
+        {
+            Texture2D? result = null;
+            await LifecycleFrame.RunNextFrame(() => result = Resize(originalTexture, targetWidth, targetHeight));
+
+            return result!;
+        }
+        
         public static Texture2D CropAndResizeToSquare(this Texture2D originalTexture, int squareSize)
         {
             // Get the original width and height

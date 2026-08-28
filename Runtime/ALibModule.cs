@@ -4,20 +4,20 @@ using AceLand.Library.ProjectSetting;
 using AceLand.Lifecycle;
 using UnityEngine;
 
-namespace AceLand.Library.Modules
+namespace AceLand.Library
 {
     [LifecycleModule(ModulePhase.Runtime, Order = -5000)]
     internal sealed class ALibSettingsModule : ModuleBase
     {
         internal AceLandProjectSettings Settings { get; private set; }
 
-        private bool initializing;
+        private bool _initializing;
 
         public override void Initialize()
         {
-            if (initializing || Settings != null) return;
+            if (_initializing || Settings != null) return;
             
-            initializing = true;
+            _initializing = true;
             
             Settings ??= Resources.Load<AceLandProjectSettings>(nameof(AceLandProjectSettings));
 
@@ -29,7 +29,7 @@ namespace AceLand.Library.Modules
             Directory.CreateDirectory(Settings.SystemRootPath);
             Directory.CreateDirectory(Settings.TempRootPath);
 
-            initializing = false;
+            _initializing = false;
             Debug.Log("AceLand Library: Project Settings Initialized.");
         }
 

@@ -22,12 +22,6 @@ namespace AceLand.Library.Editor.Providers
             _enableCreateCrypto = false;
         }
 
-        public override void OnDeactivate()
-        {
-            base.OnDeactivate();
-            Undo.ClearUndo(Settings.targetObject);
-        }
-
         [SettingsProvider]
         public static SettingsProvider CreateMyCustomSettingsProvider()
         {

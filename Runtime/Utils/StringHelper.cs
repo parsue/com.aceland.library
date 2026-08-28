@@ -3,7 +3,6 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using AceLand.Library.Modules;
 using AceLand.Lifecycle;
 
 namespace AceLand.Library.Utils
@@ -17,22 +16,23 @@ namespace AceLand.Library.Utils
         string? Decrypt(object? encrypted);
     }
     
-    public sealed class StringHelper : IStringHelper, IDisposable
+    internal sealed class StringHelper : IStringHelper, IDisposable
     {
-        internal StringHelper()
+        private StringHelper()
         {
-            Disposable = ModuleRegistry.WhenReady<ALibSettingsModule>(m =>
+            ModuleRegistry.WhenReady<ALibSettingsModule>(m =>
             {
                 var settings = m.Settings;
             
-                key = Encoding.UTF8.GetBytes(settings.Key);
-                iv = Encoding.UTF8.GetBytes(settings.IV);
+                _key = Encoding.UTF8.GetBytes(settings.Key);
+                _iv = Encoding.UTF8.GetBytes(settings.IV);
             });
         }
 
         public void Dispose()
         {
-            Disposable?.Dispose();
+            _key = null;
+            _iv = null;
         }
         
         private const string FULL_CHARACTERS = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\;',./~!@#$%^&*()_+{}|:""<>?";
@@ -40,10 +40,8 @@ namespace AceLand.Library.Utils
         private const string LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string DIGITS = "0123456789";
 
-        private IDisposable Disposable { get; }
-        
-        private byte[] key = Array.Empty<byte>();
-        private byte[] iv = Array.Empty<byte>();
+        private byte[]? _key;
+        private byte[]? _iv;
 
         public string GetRandomString(int length, CharacterType type = CharacterType.Characters)
         {
@@ -84,8 +82,8 @@ namespace AceLand.Library.Utils
         {
             using var aes = Aes.Create();
         
-            aes.Key = key;
-            aes.IV = iv;
+            aes.Key = _key!;
+            aes.IV = _iv!;
         
             var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
         
@@ -116,8 +114,8 @@ namespace AceLand.Library.Utils
                 var cipherBytes = Convert.FromBase64String(encryptedText);
                 using var aes = Aes.Create();
             
-                aes.Key = key;
-                aes.IV = iv;
+                aes.Key = _key!;
+                aes.IV = _iv!;
                 var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
         
                 using var ms = new MemoryStream(cipherBytes);

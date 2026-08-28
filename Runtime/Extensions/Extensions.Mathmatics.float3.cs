@@ -40,6 +40,9 @@ namespace AceLand.Library.Extensions
         public static float3 YZ(this float3 value, float y, float z) =>
             new(value.x, y, z);
 
+        public static float3 YXZ(this float3 value) =>
+            new(value.y, value.x, value.z);
+
         public static float3 AdjX(this float3 value, float x) =>
             new(value.x + x, value.y, value.z);
 

@@ -9,11 +9,11 @@ namespace AceLand.Library
     {
         public void Install(IContainerBuilder builder)
         {
-            builder.Register<IALibPath, ALibPath>(Lifetime.Singleton);
+            builder.Register<IGlobalPath, GlobalPath>(Lifetime.Singleton);
             builder.Register<ALibHelper>(Lifetime.Singleton);
+            builder.Register<BurstHelper>(Lifetime.Singleton);
             builder.Register<IStringHelper, StringHelper>(Lifetime.Singleton);
             builder.Register<IRegistryService, RegistryService>(Lifetime.Singleton);
-            builder.Register<IWebcamHelper, WebcamHelper>(Lifetime.Singleton);
         }
     }
 }

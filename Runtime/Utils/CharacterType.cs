@@ -1,4 +1,4 @@
-﻿namespace AceLand.Library
+﻿namespace AceLand.Library.Utils
 {
     public enum CharacterType
     {

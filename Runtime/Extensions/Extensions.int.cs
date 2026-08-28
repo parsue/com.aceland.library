@@ -53,17 +53,5 @@ namespace AceLand.Library.Extensions
             var scale = (to2 - from2) / (to1 - from1);
             return from2 + (value - from1) * scale;
         }
-
-        public static string SizeSuffix(this int value, int decimalPlaces = 2)
-        {
-            long v = value;
-            return v.SizeSuffix(decimalPlaces);
-        }
-
-        public static string CurrencySuffix(this int value, int decimalPlaces = 0)
-        {
-            long v = value;
-            return v.CurrencySuffix(decimalPlaces);
-        }
     }
 }

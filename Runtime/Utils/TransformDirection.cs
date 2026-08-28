@@ -4,4 +4,9 @@
     {
         Left, Right, Up, Down, Forward, Back,
     }
+    
+    public enum TransformDirection2D
+    {
+        Left, Right, Up, Down
+    }
 }

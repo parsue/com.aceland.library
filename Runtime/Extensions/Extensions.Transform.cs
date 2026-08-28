@@ -27,7 +27,7 @@ namespace AceLand.Library.Extensions
         public static void DestroyAllChildren(this MonoBehaviour mono) =>
             DestroyAllChildren(mono.transform);
 
-        public static void DestroyAllChildren<T>(this Transform transform) where T : MonoBehaviour
+        public static void DestroyChildrenOf<T>(this Transform transform) where T : MonoBehaviour
         {
             var list = new List<GameObject>();
             foreach (var child in transform)
@@ -43,7 +43,7 @@ namespace AceLand.Library.Extensions
             }
         }
         
-        public static void DestroyAllChildren<T>(this MonoBehaviour mono) where T : MonoBehaviour =>
-            DestroyAllChildren<T>(mono.transform);
+        public static void DestroyChildrenOf<T>(this MonoBehaviour mono) where T : MonoBehaviour =>
+            DestroyChildrenOf<T>(mono.transform);
     }
 }
