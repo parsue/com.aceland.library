@@ -7,8 +7,11 @@ All notable changes to this project will be documented in this file.
 # Road To CLR
 
 ## [3.0.0] - 2026-08-17
+### Modified
+- [Lifecycle] initial on Core phase
+- [Services & Utils] changed to Injection.
 ### Removed
-- [Helper] GameObject Fns
+- [Utils] unnecessary helper functions are removed
 
 ---
 # Before Unity 7 and CLR

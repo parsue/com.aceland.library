@@ -11,7 +11,6 @@ namespace AceLand.Library
         {
             builder.Register<IGlobalPath, GlobalPath>(Lifetime.Singleton);
             builder.Register<ALibHelper>(Lifetime.Singleton);
-            builder.Register<BurstHelper>(Lifetime.Singleton);
             builder.Register<IStringHelper, StringHelper>(Lifetime.Singleton);
             builder.Register<IRegistryService, RegistryService>(Lifetime.Singleton);
         }
