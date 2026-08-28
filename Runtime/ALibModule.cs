@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AceLand.Library
 {
-    [LifecycleModule(ModulePhase.Runtime, Order = -5000)]
+    [LifecycleModule(ModulePhase.Core, Order = -5000)]
     internal sealed class ALibSettingsModule : ModuleBase
     {
         internal AceLandProjectSettings Settings { get; private set; }
