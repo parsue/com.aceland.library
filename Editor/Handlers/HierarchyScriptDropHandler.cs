@@ -2,7 +2,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace AceLand.Library.Editor.HierarchyHandlers
+namespace AceLand.Library.Editor.Handlers
 {
     [InitializeOnLoad]
     public class HierarchyScriptDropHandler
