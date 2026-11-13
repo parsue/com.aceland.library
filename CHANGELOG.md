@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 # Road To CLR
 
+## [3.0.1] - 2026-11-13
+### Fix
+- Attribute HitBox build issue
+
 ## [3.0.0] - 2026-08-17
 ### Modified
 - [Lifecycle] initial on Core phase

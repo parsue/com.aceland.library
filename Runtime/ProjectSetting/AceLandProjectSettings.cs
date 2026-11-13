@@ -43,7 +43,9 @@ namespace AceLand.Library.ProjectSetting
         
         private void OnEnable()
         {
+#if UNITY_EDITOR
             EditorValidate();
+#endif
             
             if (key.IsNullOrEmptyOrWhiteSpace())
                 key = GetRandomKey(32);

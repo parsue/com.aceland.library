@@ -51,7 +51,7 @@ namespace AceLand.Library.Editor.Drawer
                     throw new ArgumentOutOfRangeException();
             }
 
-            EditorGUI.HelpBox(EditorGUI.IndentedRect(hintRect), attr.Hint, attr.MessageType);
+            EditorGUI.HelpBox(EditorGUI.IndentedRect(hintRect), attr.Hint, (UnityEditor.MessageType)attr.MessageType);
             EditorGUI.PropertyField(fieldRect, property, label, includeChildren: true);
         }
 
@@ -64,7 +64,7 @@ namespace AceLand.Library.Editor.Drawer
 
             var height = EditorStyles.helpBox.CalcHeight(new GUIContent(attr.Hint), textWidth);
 
-            var min = attr.MessageType == MessageType.None
+            var min = attr.MessageType == Attribute.MessageType.None
                 ? EditorGUIUtility.singleLineHeight
                 : EditorGUIUtility.singleLineHeight * 2f;
 
