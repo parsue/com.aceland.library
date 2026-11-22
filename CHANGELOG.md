@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.4] - 2026-11-22
+- fixed missing partial exception on Unity 6000.6.10
+
 ## [3.0.3] - 2026-11-22
 - remove Encrypt and Decrypt from String Helper and Project Settings
 

@@ -6,7 +6,11 @@ using Unity.Scripting.LifecycleManagement;
 
 namespace AceLand.Library.Utils
 {
+#if UNITY_6000_5_OR_NEWER
+    public sealed partial class GlobalPath : IDisposable
+#else
     public sealed class GlobalPath : IDisposable
+#endif
     {
         public static GlobalPath Get()
         {

@@ -7,7 +7,11 @@ using Unity.Scripting.LifecycleManagement;
 
 namespace AceLand.Library.Utils
 {
+#if UNITY_6000_5_OR_NEWER
+    public sealed partial class StringHelper : IDisposable
+#else
     public sealed class StringHelper : IDisposable
+#endif
     {
         public static StringHelper Get()
         {
@@ -25,8 +29,6 @@ namespace AceLand.Library.Utils
 
         public void Dispose()
         {
-            _key = null;
-            _iv = null;
             _instance = null;
         }
         
@@ -34,9 +36,6 @@ namespace AceLand.Library.Utils
         private const string CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private const string LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string DIGITS = "0123456789";
-
-        private byte[]? _key;
-        private byte[]? _iv;
 
         public string GetRandomString(int length, CharacterType type = CharacterType.Characters)
         {

@@ -8,7 +8,11 @@ using UnityEngine;
 
 namespace AceLand.Library
 {
+#if UNITY_6000_5_OR_NEWER
+    internal static partial class Bootstrapper
+#else
     internal static class Bootstrapper
+#endif
     {
 #if UNITY_6000_5_OR_NEWER
         [AutoStaticsCleanup]
