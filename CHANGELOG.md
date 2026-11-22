@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-# Road To CLR
+## [3.0.2] - 2026-11-22
+- remove dependency on Lifecycle and Injection
+- Get() as standard util instance getter
 
 ## [3.0.1] - 2026-11-13
 ### Fix

@@ -1,7 +1,6 @@
 ﻿using AceLand.Library.ProjectSetting;
 using AceLand.ProjectSetting.Editor;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace AceLand.Library.Editor.Providers
@@ -38,9 +37,7 @@ namespace AceLand.Library.Editor.Providers
                 out var tempRoot,
                 out var customerTempFolder,
                 out var systemRootPath,
-                out var tempRootPath,
-                out var key,
-                out var iv
+                out var tempRootPath
             );
             
             EditorGUI.BeginChangeCheck();
@@ -62,40 +59,10 @@ namespace AceLand.Library.Editor.Providers
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.PropertyField(tempRootPath);
             
-            EditorGUILayout.Space(12f);
-            EditorGUILayout.LabelField("Crypto", EditorStyles.boldLabel);
-            EditorGUI.BeginDisabledGroup(true);
-            key.stringValue = EditorGUILayout.TextField("Key", key.stringValue);
-            iv.stringValue = EditorGUILayout.TextField("IV", iv.stringValue);
-            EditorGUI.EndDisabledGroup();
-            
-            EditorGUILayout.HelpBox(
-                "Changing Crypto will make current encrypted values cannot decrypted correctly.\n\n" +
-                "Check Enable Create Key to enable the Create New Key button.",
-                MessageType.Warning
-            );
-            
             EditorGUILayout.HelpBox(
                 "You can undo the change. However the undo records will be clear on this page deactivated.",
                 MessageType.Info
             );
-            _enableCreateCrypto = EditorGUILayout.Toggle("Enable Create Key", _enableCreateCrypto);
-            
-            EditorGUI.BeginDisabledGroup(!_enableCreateCrypto);
-            if (GUILayout.Button("Create New Key", GUILayout.Width(200)))
-            {
-                Undo.RecordObject(Settings.targetObject, "Apply Changes");
-                Settings.ApplyModifiedProperties();
-                
-                var ps = Settings.targetObject as AceLandProjectSettings;
-                ps?.EditorGenNewKeys();
-
-                key.stringValue = ps?.Key;
-                iv.stringValue = ps?.IV;
-
-                _enableCreateCrypto = false;
-            }
-            EditorGUI.EndDisabledGroup();
             
             if (EditorGUI.EndChangeCheck())
             {
@@ -121,9 +88,7 @@ namespace AceLand.Library.Editor.Providers
             out SerializedProperty tempRoot,
             out SerializedProperty customerTempFolder,
             out SerializedProperty systemRootPath,
-            out SerializedProperty tempRootPath,
-            out SerializedProperty key,
-            out SerializedProperty iv
+            out SerializedProperty tempRootPath
         )
         {
             separateEditorAndBuild = Settings.FindProperty("separateEditorAndBuild");
@@ -133,9 +98,6 @@ namespace AceLand.Library.Editor.Providers
             customerTempFolder = Settings.FindProperty("customerTempFolder");
             systemRootPath = Settings.FindProperty("systemRootPath");
             tempRootPath = Settings.FindProperty("tempRootPath");
-            key = Settings.FindProperty("key");
-            iv = Settings.FindProperty("iv");
-            
         }
     }
 }

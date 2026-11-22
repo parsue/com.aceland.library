@@ -1,19 +1,27 @@
 ﻿using System;
 using System.IO;
 using AceLand.Library.ProjectSetting;
-using AceLand.Lifecycle;
+#if UNITY_6000_5_OR_NEWER
+using Unity.Scripting.LifecycleManagement;
+#endif
 using UnityEngine;
 
 namespace AceLand.Library
 {
-    [LifecycleModule(ModulePhase.Core, Order = -5000)]
-    internal sealed class ALibSettingsModule : ModuleBase
+    internal static class Bootstrapper
     {
-        internal AceLandProjectSettings Settings { get; private set; }
+#if UNITY_6000_5_OR_NEWER
+        [AutoStaticsCleanup]
+#endif
+        public static AceLandProjectSettings Settings { get; private set; }
 
-        private bool _initializing;
+#if UNITY_6000_5_OR_NEWER
+        [AutoStaticsCleanup]
+#endif
+        private  static bool _initializing;
 
-        public override void Initialize()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        private static void Initialize()
         {
             if (_initializing || Settings != null) return;
             
@@ -31,11 +39,6 @@ namespace AceLand.Library
 
             _initializing = false;
             Debug.Log("AceLand Library: Project Settings Initialized.");
-        }
-
-        public override void Shutdown()
-        {
-            Settings = null;
         }
     }
 }

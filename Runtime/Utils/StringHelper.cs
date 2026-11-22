@@ -3,36 +3,33 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using AceLand.Lifecycle;
+#if UNITY_6000_5_OR_NEWER
+using Unity.Scripting.LifecycleManagement;
+#endif
 
 namespace AceLand.Library.Utils
 {
-    public interface IStringHelper
+    public sealed class StringHelper : IDisposable
     {
-        string GetRandomString(int length, CharacterType type = CharacterType.Characters);
-        string Base64Encode(string plainText, Encoding encoding);
-        string Base64Decode(string base64EncodedData, Encoding encoding);
-        string Encrypt(string plainText);
-        string? Decrypt(object? encrypted);
-    }
-    
-    internal sealed class StringHelper : IStringHelper, IDisposable
-    {
-        private StringHelper()
+        public static StringHelper Get()
         {
-            ModuleRegistry.WhenReady<ALibSettingsModule>(m =>
-            {
-                var settings = m.Settings;
-            
-                _key = Encoding.UTF8.GetBytes(settings.Key);
-                _iv = Encoding.UTF8.GetBytes(settings.IV);
-            });
+            _instance ??= new StringHelper();
+            return _instance;
         }
+        
+#if UNITY_6000_5_OR_NEWER
+        [AutoStaticsCleanup]
+#endif
+        private static StringHelper? _instance;
+
+        private StringHelper() { }
+        ~StringHelper() => Dispose();
 
         public void Dispose()
         {
             _key = null;
             _iv = null;
+            _instance = null;
         }
         
         private const string FULL_CHARACTERS = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\;',./~!@#$%^&*()_+{}|:""<>?";
