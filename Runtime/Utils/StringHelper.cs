@@ -1,7 +1,5 @@
 #nullable enable
 using System;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 #if UNITY_6000_5_OR_NEWER
 using Unity.Scripting.LifecycleManagement;
@@ -73,58 +71,6 @@ namespace AceLand.Library.Utils
                 .Replace("-", "/")
                 .Replace("_", "+") + "==");
             return encoding.GetString(base64EncodedBytes);
-        }
-        
-        public string Encrypt(string value)
-        {
-            using var aes = Aes.Create();
-        
-            aes.Key = _key!;
-            aes.IV = _iv!;
-        
-            var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-        
-            using var ms = new MemoryStream();
-            using var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write);
-            using (var sw = new StreamWriter(cs))
-            {
-                sw.Write(value);
-            }
-                
-            return Convert.ToBase64String(ms.ToArray());
-        }
-        
-        public string? Decrypt(object? encrypted)
-        {
-            if (encrypted == null) return null;
-        
-            var encryptedText = encrypted switch
-            {
-                byte[] bytes => Encoding.UTF8.GetString(bytes),
-                string text => text,
-                _ => null
-            };
-            if (string.IsNullOrEmpty(encryptedText)) return null;
-        
-            try
-            {
-                var cipherBytes = Convert.FromBase64String(encryptedText);
-                using var aes = Aes.Create();
-            
-                aes.Key = _key!;
-                aes.IV = _iv!;
-                var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-        
-                using var ms = new MemoryStream(cipherBytes);
-                using var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
-                using var sr = new StreamReader(cs);
-            
-                return sr.ReadToEnd();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }

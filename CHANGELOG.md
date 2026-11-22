@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.3] - 2026-11-22
+- remove Encrypt and Decrypt from String Helper and Project Settings
+
 ## [3.0.2] - 2026-11-22
 - remove dependency on Lifecycle and Injection
 - Get() as standard util instance getter
