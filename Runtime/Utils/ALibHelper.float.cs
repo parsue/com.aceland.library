@@ -4,6 +4,12 @@ namespace AceLand.Library.Utils
 {
     public partial class ALibHelper
     {
+        public float FloorTo(float v, int digits)
+        {
+            var p = math.pow(10f, digits);
+            return math.floor(v * p) / p;
+        }
+        
         public float SmoothDamp(float current, float target, ref float currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
         {
             smoothTime = math.max(0.0001f, smoothTime);

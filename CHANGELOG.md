@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.0.5] - 2026-11-23
+- [AlibHelper] added FloorTo(float v, int digits) 
+
 ## [3.0.4] - 2026-11-22
 - fixed missing partial exception on Unity 6000.6.10
 
